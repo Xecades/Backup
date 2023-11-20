@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, maximum-scale=2">
+	<title>Xecades | About - Comment</title>
+	<meta name="author" content="Xecades">
+	<meta name="description" content="Xecades's Homepage" />
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="https://cdn.xecades.xyz/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.xecades.xyz/main-page/main.min.css">
+	<script src='//unpkg.com/valine@latest/dist/Valine.min.js'></script>
+</head>
+
+<body>
+	<header class="panel-cover"></header>
+	<div class="panel-main">
+		<div class="panel-main_inner panel-inverted">
+			<div class="panel-main_content">
+				<a href=".."><img src="https://cdn.xecades.xyz/image/logo-small.png" alt="Xecades logo"
+						class="panel-cover_logo logo"></a>
+				<!--国旗图标-->
+				<a href="#" class="Weibo_icon_position"><em title="武汉加油, 中国加油!" id="myAvatar"
+						class="Weibo_icon Weibo_icon_logo"></em></a>
+
+				<h1 class="panel-title"><a href="..">Xecades</a></h1>
+
+				<span class="panel-subtitle" id="hitokoto"><p>『祈祷中…』</p></span>
+
+				<hr class="panel-cover_divider">
+				<p class="panel-cover_description">放心吐槽, 我不会 <del>不</del> 介意的😀</p>
+				<hr class="panel-cover_divider panel-cover_divider-secondary">
+
+				<div class="navigation-wrapper">
+					<style>
+						.v .vwrap {
+							background: #fff;
+						}
+
+						.v .vlist {
+							border-radius: 3px;
+							border: 2px solid #fff;
+							background: #fff;
+						}
+					</style>
+					<div id="vcomments"></div>
+					<script>
+						new Valine({
+							el: '#vcomments',
+							appId: 'mt2RtBf6ICBmJmDQWz17P1uE-gzGzoHsz',
+							appKey: '4ocgwcavPdHjxeIPb6yy7r42',
+							notify: false,
+							verify: false,
+							avatar: 'mp',
+							placeholder: 'Where there is a shell, there is a way.'
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="panel-cover--overlay cover-slate"></div>
+	</div>
+
+	<script type="text/javascript" src="https://cdn.xecades.xyz/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.xecades.xyz/main-page/main.min.js"></script>
+</body>
+
+</html>

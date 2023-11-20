@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="/BaiduAnalyze.js"></script>
+    <script src="/MobileWarning.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>Nazo</title>
+    <style>
+        :root {
+            --background-color: black;
+            --font-color: #e2e2e2;
+            --input-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container">
+        <div class="card-wrap">
+            <div class="card cardIn">
+                <div class="title" style="top: 37%"></div>
+            </div>
+        </div>
+    </section>
+    <script src="/TypingAnimate.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var typing = new Typing("title", {
+            "typingSpeed": 90,
+            "cursorSpeed": 500,
+            "cursorChar": "|",
+            "cursorInfinity": true,
+            "head": "/* ",
+            "foot": " */",
+            "cursorColor": "white"
+        });
+        typing.sleep(1000)
+            .add("对于接下来的关卡……")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("你应当做好充足的准备")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("它们会比较难")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("耗时较长")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("而且需要较多的计算机知识")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("Get Ready")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("3...")
+            .sleep(640)
+            .delete()
+            .add("2...")
+            .sleep(640)
+            .delete()
+            .add("1...")
+            .sleep(640)
+            .delete()
+            .callback(() => {
+                window.location.href = "/Enthalpy";
+            })
+            .execute();
+    </script>
+
+</body>
+
+</html>

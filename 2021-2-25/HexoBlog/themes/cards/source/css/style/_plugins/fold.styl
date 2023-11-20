@@ -1,0 +1,42 @@
+if hexo-config('fold.enable')
+    .sliding-fold
+    details
+        display block
+        padding 16px
+        margin 0
+        &>summary
+            cursor pointer
+            outline none
+
+        .fold-content
+            margin-top 20px
+
+            &>:first-child
+                margin-top 0
+
+            &>:last-child
+                margin-bottom 0
+
+    if hexo-config('fold.motion')
+        .sliding-fold
+            &.collapsed
+                &>summary:after
+                    float right
+                    content "+"
+
+                .fold-content
+                    max-height 0
+                    overflow hidden
+                    margin 0
+            
+            &.expanded
+                &>summary:after
+                    float right
+                    content "-"
+
+                .fold-content
+                    max-height 100%
+                    overflow hidden
+
+            .fold-content
+                transition: all 0.375s

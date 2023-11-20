@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="/BaiduAnalyze.js"></script>
+    <script src="/MobileWarning.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.xecades.xyz/lib/jquery.min.js"></script>
+    <script src="https://cdn.xecades.xyz/lib/typing-animate.js"></script>
+    <title>Nazo</title>
+    <style>
+        .title {
+            position: absolute;
+            width: 100%;
+            top: 37%;
+            font-weight: 100;
+            font-size: 5vh;
+            letter-spacing: 1px
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container">
+        <div class="card-wrap">
+            <div class="card cardIn">
+                <div class="title"></div>
+                <div class="smalltitle"></div>
+                <div class="smalltitle2"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var typing = new Typing("title", {
+            "typingSpeed": 90,
+            "cursorSpeed": 500,
+            "cursorChar": "|",
+            "cursorInfinity": true,
+            "head": "/* ",
+            "foot": " */",
+            "cursorColor": "black"
+        });
+        typing.sleep(1000)
+            .add("下面介绍下您需要了解的信息")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("1. 答案对大小写敏感")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("2. 答案中不会出现任何特殊字符")
+            .sleep(500)
+            .callback(function () {
+                var sub = new Typing("smalltitle", {
+                    "typingSpeed": 90,
+                    "cursorSpeed": 500,
+                    "cursorChar": "|",
+                    "cursorInfinity": false,
+                    "cursorColor": "black"
+                });
+                sub.add("例如 \"#\"、\"&\"、\"*\" 不会出现").sleep(500).delete().execute();
+            })
+            .sleep(500 + 20 * 90 * 2)
+            .delete()
+            .sleep(200)
+            .add("Get Ready")
+            .sleep(500)
+            .delete()
+            .sleep(200)
+            .add("3...")
+            .sleep(640)
+            .delete()
+            .add("2...")
+            .sleep(640)
+            .delete()
+            .add("1...")
+            .sleep(640)
+            .callback(function () {
+                window.location.href = "../first";
+            })
+            .execute();
+    </script>
+</body>
+
+</html>

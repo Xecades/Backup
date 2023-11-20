@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Generator</title>
+    <link rel="stylesheet" href="../reset.css">
+</head>
+
+<body>
+    <div id="qrcode"></div>
+    <script src="src/qrcode.min.js"></script>
+    <div id="qrcode"></div>
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "https://xecades.xyz/",
+            width: 128,
+            height: 128,
+            colorDark: "#249ffd",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+
+</html>

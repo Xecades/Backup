@@ -1,0 +1,26 @@
+p {
+    line-height: 30px;
+}
+
+a {
+    position: relative;
+    color: #249ffd;
+}
+
+a::before {
+    content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: .125rem;
+	background-color: #249ffd;
+	transform-origin: bottom right;
+	transform: scaleX(0);
+	transition: transform .5s ease;
+}
+
+a:hover::before {
+	transform-origin: bottom left;
+	transform: scaleX(1);
+}

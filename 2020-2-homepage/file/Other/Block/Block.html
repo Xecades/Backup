@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Block.swf</title>
+</head>
+<body style="overflow: hidden;" bgcolor="#000000">
+<div id="video" align="center"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/lib/jquery.min.js"></script>
+<script type="text/javascript">
+	var docHeight = ($(document).height() - 10) + "px";
+	// swf地址
+	var swfPath = './Block.swf';
+	$(function(){
+		var html = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="100%" height="'+docHeight+'" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0">'
+			+ '<param name="loop" value="true">'
+			+ '<param name="play" value="true">'
+			+ '<param name="wmode" value="transparent">'
+			+ '<param name="allowFullScreen" value="true">'
+			+ '<param name="allownetworking" value="internal">'
+			+ '<param name="allowscriptaccess" value="never">'
+			+ '<param name="AutoStart" value="1">'
+			+ '<param name="ShowStatusBar" value="1">'
+			+ '<param name="src" value="'+swfPath+'">'
+			+ '<param name="allowfullscreen" value="true">'
+			+ '<embed type="application/x-shockwave-flash" width="100%" height="'+docHeight+'" src="'+swfPath+'" allowscriptaccess="never" allownetworking="internal" allowfullscreen="true" wmode="transparent" play="true" loop="true" autostart="true">'
+			+ '</object>';
+
+		$('#video').html(html);
+	})
+</script>
+</body>
+</html>

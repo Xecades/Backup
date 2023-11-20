@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Xecades | Code Editor</title>
+		<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+		<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+		<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+        <!--导入js库-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" charset="utf-8"></script>
+    </head>
+    
+    <body>
+        <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+        <pre id="code" class="ace_editor" style="min-height:725"><textarea class="ace_text-input">
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+using namespace std;
+int main()
+{
+	
+	return 0;
+}</textarea></pre>
+		<script>
+		//初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(false); 
+        
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+        
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true
+            });
+        </script>
+    </body>
+</html>

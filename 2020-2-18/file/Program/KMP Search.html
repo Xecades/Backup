@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <title>KMP Search.cpp</title>
+    <link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+    <link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+    <link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+<!--导入js库-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor" style="min-height:10000"><textarea class="ace_text-input">#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+void prefix_table(string, int*);
+void move_prefix_table(int*, int);
+int kmp_search(string, string);
+
+int main()
+{
+	string a, b;
+	cout << "input text:";	cin >> a;
+	cout << "input pattern:";	cin >> b;
+	if (!kmp_search(a, b))
+		cout << "find nothing";
+	return 0;
+}
+int kmp_search(string text, string pattern)
+{
+	//在text中找pattern
+	int pattern_length = pattern.length();
+	int text_length = text.length();
+	int *prefix = new int[pattern_length];
+	prefix_table(pattern, prefix);
+	move_prefix_table(prefix, pattern_length);
+
+	int i = 0, j = 0;
+	int cnt = 0;
+	while (i < text_length)
+	{
+		if (j == pattern_length - 1 && text[i] == pattern[j])
+		{
+			printf("find pattern at %d\n", i - j);
+			cnt++;
+			j = prefix[j];
+		}
+		if (text[i] == pattern[j])
+			i++, j++;
+		else
+		{
+			j = prefix[j];
+			if (j == -1)
+				i++, j++;
+		}
+	}
+	delete[] prefix;
+	return cnt;
+}
+void move_prefix_table(int *prefix, int n)
+{
+	for (int i = n - 1; i > 0; i--)
+		prefix[i] = prefix[i - 1];
+	prefix[0] = -1;
+}
+void prefix_table(string pattern, int *prefix)
+{
+	//在string类型的pattern中找prefix table，并填入prefix中
+	prefix[0] = 0;
+	int len = 0;
+	int i = 1;
+	int n = pattern.length();
+	while (i < n)
+	{
+		if (pattern[i] == pattern[len])
+		{
+			len++;
+			prefix[i] = len;
+			i++;
+		}
+		else
+		{
+			if (len > 0)
+				len = prefix[len - 1];
+			else
+			{
+				prefix[i] = 0; //或prefix[i] = len
+				i++;
+			}
+		}
+	}
+}</textarea></pre>
+    <script>
+        //初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(true);
+
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    </script>
+</body>
+
+</html>

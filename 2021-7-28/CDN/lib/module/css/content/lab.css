@@ -1,0 +1,85 @@
+#wrapper {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: lighter;
+}
+
+#wrapper .item {
+    display: table;
+    width: 32rem;
+    height: 7rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    margin-bottom: 2rem;
+    transition: border .4s;
+}
+
+#wrapper .item:hover {
+    border-right: 1px solid rgba(170, 170, 170, .4);
+}
+
+@media screen and (max-width: 32rem) {
+    #wrapper .item {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+#wrapper .item .title {
+    display: table-cell;
+    color: #249ffd;
+    text-transform: uppercase;
+    width: 7rem;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: opacity .4s;
+    -o-transition: opacity .4s;
+    transition: opacity .4s;
+}
+
+#wrapper .item .title:hover,
+#wrapper .item .des:hover {
+    opacity: .5;
+}
+
+#wrapper .item .title:active {
+    opacity: 1;
+}
+
+#wrapper .item .des {
+    display: table-cell;
+    text-align: right;
+    padding: 1rem;
+    -webkit-transition: opacity .4s;
+    -o-transition: opacity .4s;
+    transition: opacity .4s;
+    vertical-align: middle;
+    color: #aaa;
+}
+
+#wrapper .item .title i {
+    font-style: normal;
+    font-size: 1rem;
+}
+
+#wrapper .item .des i {
+    font-style: normal;
+    font-size: 1rem;
+    color: #bbb;
+}
+
+#wrapper .item .des a {
+    color: #4db2ff;
+    -webkit-transition: color .4s;
+    -o-transition: color .4s;
+    transition: color .4s;
+}
+
+#wrapper .item .des:hover a {
+    color: #249ffd;
+}

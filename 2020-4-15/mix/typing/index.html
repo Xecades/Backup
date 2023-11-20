@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Animation</title>
+    <link rel="stylesheet" href="../reset.css">
+</head>
+
+<body>
+    <div class="ani" id="title"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="src/typing.js"></script>
+    <script>
+        var typing = new Typing("ani", {
+            "typingSpeed": 100,
+            "cursorSpeed": 500,
+            "head": "/* ",
+            "foot": " */",
+            "loop": false,
+            "cursorInfinity": true,
+            "cursorChar": "|",
+            "fade": true,
+            "color": "#249ffd",
+            "cursorColor": "#249ffd"
+        });
+        typing.add("这是一句测试的效果")
+            .sleep(1000)
+            .delete(5)
+            .execute();
+    </script>
+</body>
+
+</html>

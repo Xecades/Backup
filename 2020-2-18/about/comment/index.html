@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, maximum-scale=2">
+	<title>Xecades | About - Comment</title>
+	<meta name="author" content="Xecades">
+	<meta name="description" content="Xecades's Homepage" />
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="https://cdn.xecades.xyz/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.xecades.xyz/main-page/main.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+</head>
+
+<body>
+	<span class="mobile btn-mobile-menu">
+		<i class="fa fa-list btn-mobile-menu_icon"></i>
+		<i class="fa fa-angle-up btn-mobile-close_icon hidden"></i>
+	</span>
+	<header class="panel-cover"></header>
+	<div class="panel-main">
+		<div class="panel-main_inner panel-inverted">
+			<div class="panel-main_content">
+				<a href=".."><img src="https://s2.ax1x.com/2020/02/04/1Dy2rt.png" alt="Xecades logo"
+						class="panel-cover_logo logo"></a>
+				<!--国旗图标-->
+				<a href="#" class="Weibo_icon_position"><em title="武汉加油, 中国加油!" id="myAvatar"
+						class="Weibo_icon Weibo_icon_logo"></em></a>
+
+				<h1 class="panel-title"><a href="..">Xecades</a></h1>
+
+				<span class="panel-subtitle" id="hitokoto">『祈祷中…』</span>
+
+				<hr class="panel-cover_divider">
+				<p class="panel-cover_description">放心吐槽, 我不会 <del>不</del> 介意的😀</p>
+				<hr class="panel-cover_divider panel-cover_divider-secondary">
+
+				<div class="navigation-wrapper">
+					<div id="gitalk-container"></div>
+					<script>
+						var gitalk = new Gitalk({
+							clientID: '612e13dc617db4f945c2',
+							clientSecret: '2cad38610d345233c3272b899c49dbf385c3c4e0',
+							repo: 'xecades.github.io',
+							owner: 'Xecades',
+							admin: ['Xecades'],
+							id: location.pathname, // Ensure uniqueness and length less than 50
+							distractionFreeMode: true // Facebook-like distraction free mode
+						})
+						gitalk.render('gitalk-container')
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="panel-cover--overlay cover-slate"></div>
+	</div>
+
+	<script type="text/javascript" src="https://cdn.xecades.xyz/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.xecades.xyz/main-page/main.min.js"></script>
+
+	<!-- 统计代码 -->
+</body>
+
+</html>

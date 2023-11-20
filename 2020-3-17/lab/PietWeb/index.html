@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, maximum-scale=2">
+	<title>Xecades | Piet Generator</title>
+	<meta name="author" content="Xecades">
+	<meta name="description" content="Xecades's Homepage" />
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="https://cdn.xecades.xyz/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.xecades.xyz/main-page/main.min.css">
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+	<script src="pnglib.js"></script>
+	<script src="pietApp.js"></script>
+	<script src="classie.js"></script>
+	<script src="input.js"></script>
+	<header class="panel-cover"></header>
+	<div class="panel-main">
+		<div class="panel-main_inner panel-inverted">
+			<div class="panel-main_content">
+				<h1 class="panel-title"><a href="..">Piet Generator</a></h1>
+				<div class="navigation-wrapper">
+					<span class="input input--hoshi">
+						<input class="input__field input__field--hoshi" type="text" id="outputText" />
+						<label class="input__label input__label--hoshi input__label--hoshi-color-1" for="outputText">
+						</label>
+					</span>
+					<br>
+					<div onclick='view()' id="image" class="result" title="点击下载"><img style="height:10vw;"></div>
+					<br>
+					<center>
+						<div style="width: 200px;">
+							<div id="first" onclick="createImage()" class="buttonBox">
+								<button id="btn">Generate</button>
+								<div class="border"></div>
+								<div class="border"></div>
+							</div>
+						</div>
+					</center>
+				</div>
+			</div>
+		</div>
+		<div class="panel-cover--overlay cover-slate"></div>
+	</div>
+	<script type="text/javascript" src="https://cdn.xecades.xyz/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.xecades.xyz/main-page/main.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面重定向中</title>
+
+    <style>
+        body,
+        html {
+            outline: none;
+            height: 100%;
+            width: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        *::-moz-selection {
+            background-color: rgba(187, 221, 251, 0.5);
+        }
+
+        *::selection {
+            background-color: rgba(187, 221, 251, 0.5);
+        }
+
+        a {
+            text-decoration: none;
+            color: unset;
+        }
+
+        a::hover {
+            color: unset;
+        }
+
+        a::visited {
+            color: unset;
+        }
+
+        @import url(https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);
+
+        #app {
+            padding: 5rem 6rem;
+            color: #666;
+            font-family: "EB Garamond", source-han-serif-sc, 'source han serif sc', 'source han serif cn', 'source han serif tc', 'source han serif tw', 'source han serif', songti sc, microsoft yahei, serif;
+        }
+
+        a {
+            color: rgb(0, 93, 146);
+            opacity: .7;
+            transition: opacity .2s;
+        }
+
+        a:hover {
+            opacity: 1;
+        }
+
+        rt {
+            font-weight: 500;
+            font-size: .7rem;
+        }
+
+        i {
+            font-size: .9rem;
+            font-style: unset;
+            color: #999;
+        }
+
+        #title {
+            font-size: 3rem;
+            font-weight: 500;
+            height: 5rem;
+            line-height: 5rem;
+        }
+
+        #text {
+            font-size: 1.2rem;
+            max-width: 650px;
+            line-height: 2.2rem;
+        }
+
+        #text p {
+            margin-bottom: .7rem;
+            overflow-wrap: break-word;
+        }
+
+        #text p::before {
+            content: "　　";
+        }
+
+        #text p.bold {
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 600px) {
+            #app {
+                padding: 2rem 3rem;
+            }
+
+            #title {
+                font-size: 2.5rem;
+            }
+
+            #text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const mark = "lab";
+
+        const direct = "xecades.xyz/" + mark;
+        const href = window.location.href.replace(window.location.host, direct);
+        const content = `
+        <div id="app">
+            <div id="title">导航中</div>
+            <div id="text">
+                <p class="bold">稍安勿躁。</p>
+                <p>页面将会自动跳转至：<i>${href}</i></p>
+                <p>如果网页未正常跳转，请手动点击<a href="${href}"><ruby><rb>这里</rb><rt>/${mark}</rt></ruby></a>跳转。</p>
+            </div>
+        </div>`;
+
+        document.body.innerHTML += content;
+
+        window.location = href;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>isMobile</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <ul>
+        <li class="clearfix"><span class="name">isMobile.apple.phone</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.apple.ipod</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.apple.tablet</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.apple.device</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.android.phone</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.android.tablet</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.android.device</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.amazon.phone</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.amazon.tablet</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.amazon.device</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.windows.phone</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.windows.tablet</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.windows.device</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.blackberry_10</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.blackberry</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.opera</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.firefox</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.chrome</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.other.device</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.any</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.phone</span><span class="res"></span></li>
+        <li class="clearfix"><span class="name">isMobile.tablet</span><span class="res"></span></li>
+    </ul>
+    <script src="https://cdn.jsdelivr.net/npm/ismobilejs@1.0.3/dist/isMobile.min.js"></script>
+    <script>
+        var res = document.getElementsByClassName("res");
+        for (var i = 0; i < res.length; i++) {
+            res[i].innerHTML = eval(res[i].previousSibling.innerHTML);
+        }
+    </script>
+</body>
+
+</html>

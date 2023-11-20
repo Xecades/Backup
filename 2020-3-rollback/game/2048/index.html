@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Xecades | 2048</title>
+
+	<link href="main.css" rel="stylesheet" type="text/css">
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport"
+		content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+	<style type="text/css">
+		a {
+			text-decoration: none
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="heading">
+			<h1 class="title"><a href="..">2048</a></h1>
+			<div class="scores-container">
+				<div class="score-container">0</div>
+				<div class="best-container">0</div>
+			</div>
+		</div>
+
+		<div class="above-game">
+			<p class="game-intro">合并评测状态并得到 <strong>2048!</strong></p>
+			<a class="restart-button">弃疗</a>
+		</div>
+
+		<div class="game-container">
+			<div class="game-message">
+				<p></p>
+				<div class="lower">
+					<a class="keep-playing-button">继续</a>
+					<a class="retry-button">再来一局</a>
+				</div>
+			</div>
+
+			<div class="grid-container">
+				<div class="grid-row">
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+				</div>
+				<div class="grid-row">
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+				</div>
+				<div class="grid-row">
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+				</div>
+				<div class="grid-row">
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+					<div class="grid-cell"></div>
+				</div>
+			</div>
+
+			<div class="tile-container">
+
+			</div>
+		</div>
+
+		<p class="game-explanation">
+			<h2>玩法 | How to Play</h2>
+			使用<strong>方向键</strong>或<strong>手指划屏</strong>的方式移动方块. 当<strong>相同状态</strong>的方块相撞,
+			它们会合并成<strong>两倍数值</strong>的方块.</strong>
+		</p>
+		<hr>
+		<p>
+			<h2>鸣谢 | Special Thanks</h2>
+			原作者：<strong><a href="https://gabrielecirulli.com/">Gabriele Cirulli</a></strong><br>
+			基于：　<strong><a href="https://itunes.apple.com/us/app/1024!/id823499224">1024 by Veewo Studio</a></strong>
+		</p>
+	</div>
+
+	<script src="js/bind_polyfill.js"></script>
+	<script src="js/classlist_polyfill.js"></script>
+	<script src="js/animframe_polyfill.js"></script>
+	<script src="js/keyboard_input_manager.js"></script>
+	<script src="js/html_actuator.js"></script>
+	<script src="js/grid.js"></script>
+	<script src="js/tile.js"></script>
+	<script src="js/local_storage_manager.js"></script>
+	<script src="js/game_manager.js"></script>
+	<script src="js/application.js"></script>
+</body>
+
+</html>

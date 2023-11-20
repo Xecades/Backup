@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>矩阵乘法 - Waterdrop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。 另，$1\times m$的矩阵又叫做向量(没错就是$vector$)">
+<meta name="keywords" content="矩阵,数论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵乘法">
+<meta property="og:url" content="https://xecades.xyz/2019/07/11/matrix/index.html">
+<meta property="og:site_name" content="Waterdrop">
+<meta property="og:description" content="一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。 另，$1\times m$的矩阵又叫做向量(没错就是$vector$)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xecades.xyz/images/og_image.png">
+<meta property="og:updated_time" content="2019-07-11T22:48:53.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="矩阵乘法">
+<meta name="twitter:description" content="一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。 另，$1\times m$的矩阵又叫做向量(没错就是$vector$)">
+<meta name="twitter:image" content="https://xecades.xyz/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="矩阵乘法" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/note">Note</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+                <a class="navbar-item" href="/progress">Progress</a>
+                
+                <a class="navbar-item" href="/other">Others</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub Xecades" href="https://github.com/Xecades">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-11T05:05:04.000Z">2019-07-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/运算/">运算</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 分钟 读完 (大约 3207 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                矩阵乘法
+            
+        </h1>
+        <div class="content">
+            <p>一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。</p>
+<p>另，$1\times m$的矩阵又叫做向量(没错就是$vector$)</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="啥是矩阵乘法"><a href="#啥是矩阵乘法" class="headerlink" title="啥是矩阵乘法"></a>啥是矩阵乘法</h2><p>蒟阵乘法，顾名思义，就是两个矩阵(蒟蒻)乘起来，不过和普通的乘法不一样。</p>
+<h3 id="A-两个矩阵能相乘的条件"><a href="#A-两个矩阵能相乘的条件" class="headerlink" title="A.两个矩阵能相乘的条件"></a>A.两个矩阵能相乘的条件</h3><p>当一个矩阵的行数等于另一个矩阵的列数时，两个相乘才有意义。</p>
+<h3 id="B-矩阵咋相乘"><a href="#B-矩阵咋相乘" class="headerlink" title="B.矩阵咋相乘"></a>B.矩阵咋相乘</h3><p>三个矩阵$a,b,c$</p>
+<p>如果$a$等于$bc$的乘积，那么写作$a=bc$</p>
+<p>假设$b,c$都是$n\times n$的矩阵，那么有</p>
+<p>$$a_{ij}=\sum^n_{k=1}b_{ik}\times c_{kj}$$</p>
+<p>写成矩阵的形式就是</p>
+<p>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix}=\begin{bmatrix} a\times e+b\times g &amp; a\times f+b\times h \\ c\times e+d\times g &amp; c\times f+d\times h\end{bmatrix}$$</p>
+<p>这也就是为什么必须要求一个矩阵的行数等于另一个矩阵的列数，否则元素数不相等</p>
+<h3 id="C-注意事项"><a href="#C-注意事项" class="headerlink" title="C.注意事项"></a>C.注意事项</h3><p>如果两个大小为$a\times n,n\times m$的矩阵相乘,最后乘出来的矩阵就是是$a\times m$的</p>
+<p>而矩阵乘法的次数就是$a\times n\times m$</p>
+<p>例如$2\times 3$和$3\times 2$的矩阵相乘</p>
+<p>$$\left[\begin{array}{lll}{1} &amp; {2} &amp; {3} \\ {4} &amp; {5} &amp; {6}\end{array}\right]\left[\begin{array}{ll}{1} &amp; {4} \\ {2} &amp; {5} \\ {3} &amp; {6}\end{array}\right]=\left[\begin{array}{lll}{1 \times  1+2 \times  2+3} &amp; {1 \times  4+2 \times  5+3+3+3} \\ {4 \times  1+5 \times  2+6 \times  3} &amp; {4 \times  4+5 \times  5+6 \times  6}\end{array}\right]$$</p>
+<p>如果问原因的话，我们可以发现，新矩阵的行数和左边矩阵的行数相等，而新矩阵的列数和后边矩阵的列数相等。</p>
+<h3 id="D-这东西有啥性质啊"><a href="#D-这东西有啥性质啊" class="headerlink" title="D.这东西有啥性质啊"></a>D.这东西有啥性质啊</h3><ol>
+<li><p>矩阵乘法满足结合律，即$a(bc)=(ab)c$，可以通过这个性质减少乘法次数</p>
+</li>
+<li><p>而且，矩阵乘法没有交换律<br>因为普通的加法和乘法满足交换律的原因是因为加法和乘法的结果都只是一个数,而矩阵的本质是数的排列,所以运算结果还是矩阵，并不是一个数，自然和数有区别</p>
+</li>
+<li><p>矩阵的单位元…<del>这东西也不知道放在哪，就写这吧。</del></p>
+<p>$\left[\begin{array}{lll}{1} &amp; {0} &amp; {0} \\ {0} &amp; {1} &amp; {0} \\ {0} &amp; {0} &amp; {1}\end{array}\right]$就是对角线上全为1</p>
+</li>
+</ol>
+<hr>
+<h2 id="这玩意有啥用"><a href="#这玩意有啥用" class="headerlink" title="这玩意有啥用"></a>这玩意有啥用</h2><p>我咋知道啊</p>
+<p>在某些题中可以加速递推公式，可以把一个$O(n)$的式子优化到$O(logn)$</p>
+<h4 id="应用前提：矩阵快速幂-这又是啥啊"><a href="#应用前提：矩阵快速幂-这又是啥啊" class="headerlink" title="应用前提：矩阵快速幂(这又是啥啊)"></a>应用前提：矩阵快速幂(这又是啥啊)</h4><p>因为矩阵的乘法也有结合律，所以也可以用快速幂加速，也是矩阵优化递推的原理，即把一个不能用快速幂优化的式子转换成快速幂的形式</p>
+<hr>
+<h2 id="来个栗子啊"><a href="#来个栗子啊" class="headerlink" title="来个栗子啊"></a>来个栗子啊</h2><p>出门左转炒锅</p>
+<p>$$f(n) = f(n-1) + f(n-2)　(n\geq 2且n\in\mathbb{Z})$$</p>
+<p>请你求出$f(n)\mod10^9+7$的值($n$在$longlong$($INT64$)范围内)。</p>
+<p>显然线性爆炸，所以考虑加速。那么很容易想到矩阵乘法(<del>我也不会别的</del>)</p>
+<p>那么考虑把这个递推式子变成可以矩阵的形式，那么就考虑把答案弄进一个矩阵里，(那么就设一个$1\times 1$的吧！(啪))</p>
+<p>显然，设一个$1\times 1$的矩阵是一个很不明智的行为，因为没法转移。考虑到当前的状态与前两项有关。</p>
+<p>所以构造一个$1\times 2$向量表示$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}$</p>
+<p>那么转移也就很显然了</p>
+<p>我们要达到这样一个目的：</p>
+<p>$$\begin{bmatrix}F_{n-1} &amp; F_{n-2}\end{bmatrix}\rightarrow\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}$$</p>
+<p>变个形</p>
+<p>$$\begin{bmatrix}F_{n-1} &amp; F_{n-2}\end{bmatrix}\rightarrow\begin{bmatrix}F_{n-1}\times 1+F_{n-2}\times 1 &amp; F_{n-1}\times 1\end{bmatrix}$$</p>
+<p>那么就可以构造中间的矩阵了</p>
+<p>显然就是</p>
+<p>$$\begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix}$$</p>
+<p>带回去验证一下$qwq$</p>
+<p>$$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix}=\begin{bmatrix}F_{n-1}\times 1+F_n\times 1 &amp; F_{n}\times 1+F_{n-1}\times 0\end{bmatrix}=\begin{bmatrix}F_{n+1} &amp; F_{n}\end{bmatrix}$$</p>
+<p>发现成立了诶。</p>
+<hr>
+<h2 id="更大的栗子"><a href="#更大的栗子" class="headerlink" title="更大的栗子"></a>更大的栗子</h2><p>出门右转大炒锅</p>
+<p>广义的斐波那契数列是指形如$a_n=p\times a_{n-1}+q\times a_{n-2}$的式子，给出$p,q,a_1,a_2,n,m$，求$a_n\mod m$。</p>
+<p>除了和上一题的系数不变没区别啊喂(#`O′)<del>(啪，多嘴)</del></p>
+<p>考虑到只有转移时的系数变了，那么只要改变你构造的矩阵就可以了，那么我们再考虑转移是如何进行的</p>
+<p>$$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1  &amp; 1 \\ 1 &amp; 0\end{bmatrix}=\begin{bmatrix}F_{n-1}\times 1+F_n\times 1 &amp; F_{n}\times 1+F_{n-1}\times 0\end{bmatrix}=\begin{bmatrix}F_{n+1} &amp; F_{n}\end{bmatrix}$$</p>
+<p>那么注意到改变的实际上只有这一项$F_{n-1}\times 1+F_n\times 1$，考虑这一项是怎么来的，根据矩阵乘法的定义我们知道这一项实际上是</p>
+<p>向量的第一行乘矩阵的第一列，也就是$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1 \\ 1\end{bmatrix}$</p>
+<p>那么我们只需要改动这一列即可，即把这一列改为$\begin{bmatrix}p \\ q\end{bmatrix}$</p>
+<p>那么最后的转移矩阵就是</p>
+<p>$$\begin{bmatrix}p &amp; 1 \\ q &amp; 0\end{bmatrix}$$</p>
+<p>最后放上这个题的核心代码</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ll mod;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mar</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">    ll a[<span class="hljs-number">4</span>][<span class="hljs-number">4</span>];</span><br><span class="line">&#125;ans,base;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">mar <span class="hljs-title">mul</span><span class="hljs-params">(mar x,mar y)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    mar t;</span><br><span class="line">    <span class="hljs-built_in">memset</span>(t.a,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(t.a));</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">2</span>;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=<span class="hljs-number">2</span>;++j)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=<span class="hljs-number">2</span>;++k)</span><br><span class="line">            t.a[i][j]+=(x.a[i][k])%mod*(y.a[k][j])%mod,t.a[i][j]%=mod;</span><br><span class="line">    <span class="hljs-keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ans.a[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=a2,ans.a[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]=a1;</span><br><span class="line">base.a[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]=<span class="hljs-number">1</span>;</span><br><span class="line">base.a[<span class="hljs-number">2</span>][<span class="hljs-number">1</span>]=q;</span><br><span class="line">base.a[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=p;</span><br><span class="line">ksm(n<span class="hljs-number">-2</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="关于矩阵乘法的优化"><a href="#关于矩阵乘法的优化" class="headerlink" title="关于矩阵乘法的优化"></a>关于矩阵乘法的优化</h2><h3 id="A-缓存优化"><a href="#A-缓存优化" class="headerlink" title="A.缓存优化"></a>A.缓存优化</h3><p>先普及一点知识: $CPU\space cache$</p>
+<p>通俗点说就是平时说的缓存，是位于$CPU$和内存之间的临时存储器，具有体积小，交换速率快的特点，存储的是$CPU$即将访问的内存。</p>
+<p>所以缓存存在的意义就是为了加快内存访问的速度。</p>
+<p>那么对于$OIer$来说，这东西唯一的用处就是卡常，可能会有人听过”数组不要开偶偶数大小”之类的玄学。但这可能真的是有用的。</p>
+<p>程序在一段时间内访问的数据通常具有局部性，比如对一维数组来说，访问了地址x上的元素，那么以后访问地址$x+1$、$x+2$上元素的可能性就比较高；这也称为$cache$的空间局限性。</p>
+<p>如果说人话的话。就是数组的访问顺序是水平连续的。</p>
+<p>让我们再来两个栗子</p>
+<ul>
+<li><p>1</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=n;++k)</span><br><span class="line">            c[i][j]=a[i][k]*b[k][j];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=n;++k)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">            c[i][j]=a[i][k]*b[k][j];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>眼尖的同学可能会发现，这两段程序唯一的不同只有二三层的循环循顺序啊(#`O′)<del>(啪，就你多嘴)</del></p>
+<p>那么实际上的效率可能会在数据很大的时候产生极大的差异。</p>
+<p>因为根据我们上边所了解到的信息，对于代码2中的$a[i]$和$b[k]$这两行的访问都是连续的，所以缓存会被充分利用。这样就达到了卡常的目的。</p>
+<p>这种做法的术语是$loop\space permutation$(循环置换)</p>
+<p>测试代码（搬运的时候图片丢了，凑合着看吧）</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> file(a) freopen(a<span class="hljs-meta-string">".in"</span>,<span class="hljs-meta-string">"r"</span>,stdin);freopen(a<span class="hljs-meta-string">".out"</span>,<span class="hljs-meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">char</span> IN[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">char</span> <span class="hljs-title">gc</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>,<span class="hljs-built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;<span class="hljs-keyword">register</span> <span class="hljs-keyword">char</span> c=gc();</span><br><span class="line">    <span class="hljs-keyword">for</span>(;!<span class="hljs-built_in">isdigit</span>(c);c==<span class="hljs-string">'-'</span>&amp;&amp;(f=<span class="hljs-number">-1</span>),c=gc());</span><br><span class="line">    <span class="hljs-keyword">for</span>(;<span class="hljs-built_in">isdigit</span>(c);now=now*<span class="hljs-number">10</span>+c-<span class="hljs-string">'0'</span>,c=gc());</span><br><span class="line">    <span class="hljs-keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> a[<span class="hljs-number">1100</span>][<span class="hljs-number">1100</span>];</span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> temp[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];</span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> b[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];</span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> c[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    freopen(<span class="hljs-string">"a.out"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="hljs-string">"x1.out"</span>,<span class="hljs-string">"w"</span>,<span class="hljs-built_in">stdout</span>);</span><br><span class="line">    <span class="hljs-keyword">int</span> n=read();</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)b[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)c[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=n;++k)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">                (a[i][j]+=b[i][k]*c[k][j])%=mod;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// for(int i=1;i&lt;=n;++i)</span></span><br><span class="line">    <span class="hljs-comment">//  for(int j=1;j&lt;=n;++j)</span></span><br><span class="line">    <span class="hljs-comment">//      for(int k=1;k&lt;=n;++k)</span></span><br><span class="line">    <span class="hljs-comment">//          (a[i][j]+=(b[i][k]*c[k][j]))%=mod;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld "</span>,a[<span class="hljs-number">5</span>][i]);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Elapsed time:%.2lf secs.\n"</span>,<span class="hljs-number">1.0</span>*clock()/<span class="hljs-number">1000.0</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有兴趣的同学可以去尝试做一下<a href="http://acm.hdu.edu.cn/showproblem.php?pid=4920" target="_blank" rel="noopener">$HUD4920$</a>。</p>
+<p>经典的矩阵乘法卡$(du)$常$(liu)$题。</p>
+<h3 id="B-矩阵分块"><a href="#B-矩阵分块" class="headerlink" title="B.矩阵分块"></a>B.矩阵分块</h3><p>当矩阵特别大时，可能会发生缓存放不下的情况，那么之前的$ikj$优化就会收效甚微，所以我们考虑把一个矩阵分为几块子矩阵，不过需要注意的是A的行的划分与B的列的划分必须一致。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> size=n/<span class="hljs-number">25</span>;</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> it=<span class="hljs-number">1</span>;it&lt;=n;it+=size)</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> jt=<span class="hljs-number">1</span>;jt&lt;=n;jt+=size)</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> kt=<span class="hljs-number">1</span>;kt&lt;=n;kt+=size)</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=it;i&lt;=it+size;i++)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=jt;j&lt;=jt+size;j++)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=kt;k&lt;=kt+size;k++)</span><br><span class="line">                (a[i][j]+=b[i][k]*c[k][j])%=mod;</span><br></pre></td></tr></table></figure>
+
+<h3 id="C-次数优化"><a href="#C-次数优化" class="headerlink" title="C.次数优化"></a>C.次数优化</h3><p>大家可能做过最优矩阵链乘问题问题。</p>
+<p>本质就是利用结合律来减少乘法次数。</p>
+<p>例如</p>
+<p>A是一个$50×10$的矩阵，B是$10×20$的矩阵，C是$20×5$的矩阵</p>
+<p>那么要把$ABC$乘起来的话，有两种顺序，一种是$(A(BC))$，另一种是$((AB)C)$</p>
+<p>而这两种顺序的乘法次数一个是$3500$次，而另一个却是$15000$次,所以当数据非常大的时候，我们可以考虑构造一个乘法的顺序，使得乘法次数最小，但只适用于矩阵少而大的情况。</p>
+<h3 id="D-取模优化"><a href="#D-取模优化" class="headerlink" title="D.取模优化"></a>D.取模优化</h3><p>众所周知，计算机中的取模运算非常之慢，而$long\space long$的取模是最慢的，所以很多人程序的常数大的原因也是这个。所以我们可能会在某些人的程序中看到这样的函数</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ll <span class="hljs-title">mo</span><span class="hljs-params">(ll x,ll y)</span></span>&#123;<span class="hljs-keyword">return</span> x+y&gt;=mod?x+y-mod:x+y;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就是利用减法代替取模从而达到卡常的效果。</p>
+<p>对于矩阵乘法也是这样。我们可以设定一个$ull$上界$Q=16ull*mod$，当超过这个上界时就可以直接用减法代替取模，因为当$mod$在$10^9$级别时，$ull$最多只能存下$16$个$mod\times mod$相加。</p>
+<p>当然中间过程需要$long\space long$来存储，而最后的结果最好还是$int$类型。</p>
+<p>所以取模次数由$O(n^3)$降到$O(n^2)$次</p>
+<p>但实际效果略逊于$ikj$，可能是本机的问题</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> file(a) freopen(a<span class="hljs-meta-string">".in"</span>,<span class="hljs-meta-string">"r"</span>,stdin);freopen(a<span class="hljs-meta-string">".out"</span>,<span class="hljs-meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">char</span> IN[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">char</span> <span class="hljs-title">gc</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>,<span class="hljs-built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;<span class="hljs-keyword">register</span> <span class="hljs-keyword">char</span> c=gc();</span><br><span class="line">    <span class="hljs-keyword">for</span>(;!<span class="hljs-built_in">isdigit</span>(c);c==<span class="hljs-string">'-'</span>&amp;&amp;(f=<span class="hljs-number">-1</span>),c=gc());</span><br><span class="line">    <span class="hljs-keyword">for</span>(;<span class="hljs-built_in">isdigit</span>(c);now=now*<span class="hljs-number">10</span>+c-<span class="hljs-string">'0'</span>,c=gc());</span><br><span class="line">    <span class="hljs-keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>  ull;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ull Q=<span class="hljs-number">16u</span>ll*mod*mod;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> a[<span class="hljs-number">1100</span>][<span class="hljs-number">1100</span>];</span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> temp;</span><br><span class="line">ull b[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];</span><br><span class="line">ull c[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">ull <span class="hljs-title">mo</span><span class="hljs-params">(ull x,ull y)</span></span>&#123;<span class="hljs-keyword">return</span> x+y&gt;=Q?x+y-Q:x+y;&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    freopen(<span class="hljs-string">"a.out"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="hljs-string">"x2.out"</span>,<span class="hljs-string">"w"</span>,<span class="hljs-built_in">stdout</span>);</span><br><span class="line">    <span class="hljs-keyword">int</span> n=read();</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)b[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)c[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            temp=<span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>,s=<span class="hljs-number">1</span>;k&lt;=n;++k,s++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span>(s==<span class="hljs-number">16</span>)temp=mo(temp,b[i][k]*c[k][j]),s=<span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">else</span> temp+=b[i][k]*c[k][j];</span><br><span class="line">            &#125;</span><br><span class="line">            a[i][j]=temp%mod;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,a[<span class="hljs-number">5</span>][i]);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Elapsed time:%.2lf secs.\n"</span>,<span class="hljs-number">1.0</span>*clock()/<span class="hljs-number">1000.0</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和$ikj$优化一起用的效果</p>
+<p><img src="https://i.loli.net/2019/07/11/5d26d290089c675334.png" alt></p>
+<h3 id="E-特判优化"><a href="#E-特判优化" class="headerlink" title="E.特判优化"></a>E.特判优化</h3><p>特判矩阵的元素是否为$0$，如果是$0$可以直接$continue$,在稀疏矩阵里有奇效，由于数据比较难生成，所以不实际运行.还请见谅</p>
+<hr>
+<p>感谢审核的$@ComeIntoPower$提出的宝贵意见。</p>
+<p>另:测试数据均为以下代码生成</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> file(a) freopen(a<span class="hljs-meta-string">".in"</span>,<span class="hljs-meta-string">"r"</span>,stdin);freopen(a<span class="hljs-meta-string">".out"</span>,<span class="hljs-meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">char</span> IN[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">char</span> <span class="hljs-title">gc</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">17</span>,<span class="hljs-built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;<span class="hljs-keyword">register</span> <span class="hljs-keyword">char</span> c=gc();</span><br><span class="line">    <span class="hljs-keyword">for</span>(;!<span class="hljs-built_in">isdigit</span>(c);c==<span class="hljs-string">'-'</span>&amp;&amp;(f=<span class="hljs-number">-1</span>),c=gc());</span><br><span class="line">    <span class="hljs-keyword">for</span>(;<span class="hljs-built_in">isdigit</span>(c);now=now*<span class="hljs-number">10</span>+c-<span class="hljs-string">'0'</span>,c=gc());</span><br><span class="line">    <span class="hljs-keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    srand(time(<span class="hljs-literal">NULL</span>)*<span class="hljs-number">20020307</span>%<span class="hljs-number">19260817</span>);</span><br><span class="line">    freopen(<span class="hljs-string">"a.out"</span>,<span class="hljs-string">"w"</span>,<span class="hljs-built_in">stdout</span>);</span><br><span class="line">    <span class="hljs-keyword">int</span> n=<span class="hljs-number">1000</span>;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"1000\n"</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,rand()*<span class="hljs-number">10</span>+<span class="hljs-number">50000</span>);</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,rand()*<span class="hljs-number">10</span>+<span class="hljs-number">50000</span>);</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// printf("Elapsed time:%.2lf secs.\n",1.0*clock()/1000.0);</span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>本文转载某作者（原谅我实在是找不到作者的名字）的<a href="https://shehuizhuyihao.blog.luogu.org/post-zhen-sheng-fa" target="_blank" rel="noopener">文章</a></p>
+<p><del>侵删</del></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/数论/">数论</a>, <a class="has-link-grey -link" href="/tags/矩阵/">矩阵</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">--------完·谢谢阅读--------</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/11/PhoneView/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">手机视角</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/30/BigNumCalc/">
+                <span class="level-item">高精度计算代码</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '062ee929cf80fdb1d10c',
+        clientSecret: 'e854d3ee28dc91637e00dedaa74ab27d342b24c0',
+        id: '1a89c1420347a8de8f686605bb8fbbe5',
+        repo: 'Xecades.github.io',
+        owner: 'Xecades',
+        admin: "Xecades"
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://www.gravatar.com/avatar/57aa3b881171b63020990cb8a2924932?s=128" alt="Xecades">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Xecades
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Drink a cup of tea
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国·四川·德阳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        23
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Xecades" target="_blank">
+                SUIVRE</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/Xecades">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="E-Mail" href="mailto:a1227253013@qq.com">
+                
+                <i class="fas fa-envelope"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="QQ" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2135174618&amp;site=qq&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="洛谷" href="https://www.luogu.org/space/show?uid=64434">
+                
+                <i class="fas fa-spinner"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="洛谷博客" href="https://tlblog.blog.luogu.org/#">
+                
+                <i class="fas fa-th-large"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/Xecades" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Xecades</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.luogu.org/space/show?uid=64434" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Luogu</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.luogu.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- 标签球 -->
+
+<div class="card widget">
+    <div class="card-content">
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="menu-label">
+                标签球
+            </h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="280" height="250" id="resCanvas" style="width=100%">
+					<a href="/tags/C-11/" style="font-size: 12.5px;">C++11</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/NOIP/" style="font-size: 10px;">NOIP</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/二进制/" style="font-size: 12.5px;">二进制</a> <a href="/tags/位运算/" style="font-size: 12.5px;">位运算</a> <a href="/tags/字符串/" style="font-size: 12.5px;">字符串</a> <a href="/tags/库函数/" style="font-size: 10px;">库函数</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/模拟/" style="font-size: 12.5px;">模拟</a> <a href="/tags/滑稽/" style="font-size: 12.5px;">滑稽</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/类/" style="font-size: 17.5px;">类</a> <a href="/tags/背包/" style="font-size: 10px;">背包</a> <a href="/tags/英文/" style="font-size: 10px;">英文</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a> <a href="/tags/难度★★★☆☆/" style="font-size: 10px;">难度★★★☆☆</a> <a href="/tags/难度★★☆☆☆/" style="font-size: 12.5px;">难度★★☆☆☆</a> <a href="/tags/难度★☆☆☆☆/" style="font-size: 15px;">难度★☆☆☆☆</a> <a href="/tags/题解/" style="font-size: 20px;">题解</a> <a href="/tags/高精度/" style="font-size: 10px;">高精度</a>
+				</canvas>
+			</div>
+		</div>
+	</div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C-11/">
+            <span class="level-start">
+                <span class="level-item">C++11</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DP/">
+            <span class="level-start">
+                <span class="level-item">DP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/STL/">
+            <span class="level-start">
+                <span class="level-item">STL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/博客/">
+            <span class="level-start">
+                <span class="level-item">博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/运算/">
+            <span class="level-start">
+                <span class="level-item">运算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/随笔/">
+            <span class="level-start">
+                <span class="level-item">随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <!-- 见links.ejs文件 -->
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T22:43:08.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/PriorityLevel/" class="has-link-black-ter is-size-6">运算符优先级</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C-11/">C++11</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T06:40:19.000Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/PhoneView/" class="has-link-black-ter is-size-6">手机视角</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T05:05:04.000Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/matrix/" class="has-link-black-ter is-size-6">矩阵乘法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/运算/">运算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T01:50:50.000Z">2019-06-30</time></div>
+                    <a href="/2019/06/30/BigNumCalc/" class="has-link-black-ter is-size-6">高精度计算代码</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/运算/">运算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-28T11:21:36.000Z">2019-06-28</time></div>
+                    <a href="/2019/06/28/Backpack/" class="has-link-black-ter is-size-6">动态规划-01背包问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DP/">DP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NOIP/">
+                        <span class="tag">NOIP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二进制/">
+                        <span class="tag">二进制</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/位运算/">
+                        <span class="tag">位运算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字符串/">
+                        <span class="tag">字符串</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/库函数/">
+                        <span class="tag">库函数</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/教程/">
+                        <span class="tag">教程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/模拟/">
+                        <span class="tag">模拟</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滑稽/">
+                        <span class="tag">滑稽</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/矩阵/">
+                        <span class="tag">矩阵</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/类/">
+                        <span class="tag">类</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/背包/">
+                        <span class="tag">背包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/英文/">
+                        <span class="tag">英文</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随笔/">
+                        <span class="tag">随笔</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★★☆☆/">
+                        <span class="tag">难度★★★☆☆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★☆☆☆/">
+                        <span class="tag">难度★★☆☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★☆☆☆☆/">
+                        <span class="tag">难度★☆☆☆☆</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/题解/">
+                        <span class="tag">题解</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高精度/">
+                        <span class="tag">高精度</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T22:43:08.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/PriorityLevel/" class="has-link-black-ter is-size-6">运算符优先级</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C-11/">C++11</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T06:40:19.000Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/PhoneView/" class="has-link-black-ter is-size-6">手机视角</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T05:05:04.000Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/matrix/" class="has-link-black-ter is-size-6">矩阵乘法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/运算/">运算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T01:50:50.000Z">2019-06-30</time></div>
+                    <a href="/2019/06/30/BigNumCalc/" class="has-link-black-ter is-size-6">高精度计算代码</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/运算/">运算</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-28T11:21:36.000Z">2019-06-28</time></div>
+                    <a href="/2019/06/28/Backpack/" class="has-link-black-ter is-size-6">动态规划-01背包问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DP/">DP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NOIP/">
+                        <span class="tag">NOIP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二进制/">
+                        <span class="tag">二进制</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/位运算/">
+                        <span class="tag">位运算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字符串/">
+                        <span class="tag">字符串</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/库函数/">
+                        <span class="tag">库函数</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/教程/">
+                        <span class="tag">教程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/模拟/">
+                        <span class="tag">模拟</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滑稽/">
+                        <span class="tag">滑稽</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/矩阵/">
+                        <span class="tag">矩阵</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/类/">
+                        <span class="tag">类</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/背包/">
+                        <span class="tag">背包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/英文/">
+                        <span class="tag">英文</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随笔/">
+                        <span class="tag">随笔</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★★☆☆/">
+                        <span class="tag">难度★★★☆☆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★☆☆☆/">
+                        <span class="tag">难度★★☆☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★☆☆☆☆/">
+                        <span class="tag">难度★☆☆☆☆</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/题解/">
+                        <span class="tag">题解</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高精度/">
+                        <span class="tag">高精度</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="矩阵乘法" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Xecades&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次<span class="post-meta-divider">  |  </span></span>本站访客数<span id="busuanzi_value_site_uv"></span>人次
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

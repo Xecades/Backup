@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html data-minimalscrollbar="yes">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Xecades | Shifter</title>
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="stylesheet" href="./style.css" media="screen" type="text/css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.xecades.xyz/lib/font-awesome.min.css">
+</head>
+
+<style>
+	html {
+		overflow: -moz-hidden-unscrollable;
+		-ms-overflow-style: none;
+		height: 100%;
+	}
+
+	body::-webkit-scrollbar {
+		display: none;
+	}
+
+	body {
+		-ms-overflow-style: none;
+		height: 100%;
+		width: calc(100vw + 18px);
+		overflow: auto;
+	}
+</style>
+
+<body class="body--ready">
+	<a href=".." title="返回上一页"><i class="fa fa-level-up fa-fw"></i>Back</a>
+	<canvas class="canvas" width="90%" height="90%"></canvas>
+	<div class="help">?</div>
+	<div class="ui"> <input class="ui-input" type="text"> <span class="ui-return">↵</span></div>
+	<div class="overlay">
+		<div class="tabs">
+			<div class="tabs-labels">
+				<span class="tabs-label">Myself</span>
+				<span class="tabs-label">Info</span>
+				<span class="tabs-label">Command</span>
+			</div>
+			<div class="tabs-panels">
+				<div class="tabs-panel ui-introduction">
+					<div class="ui-content">
+						<h2>关于我 | About Me</h2>
+						<p>网名 Xecades, 取于单词 Decade: </p>
+						<p>Decade <i class="fa fa-chevron-right" aria-hidden="true"></i> Ten Decades <i
+								class="fa fa-chevron-right" aria-hidden="true"></i> X Decades <i
+								class="fa fa-chevron-right" aria-hidden="true"></i> Xecades</p>
+						<br>
+						<p>初中: 四川省绵阳东辰国际学校</p>
+						<p>高中: 四川省成都七中 <i class="fa fa-angle-double-left" aria-hidden="true"></i> 当前高一</p>
+					</div>
+				</div>
+				<div class="tabs-panel ui-introduction">
+					<div class="ui-content">
+						<h2>致谢 | Special Thanks</h2>
+						<p>该页面修改自 <a href="http://www.kennethcachia.com/">Kenneth Cachia</a> 的项目 <a
+								href="http://www.kennethcachia.com/shape-shifter/">Shape-Shifter</a>。</p>
+						<p>Page redesigned from project <a
+								href="http://www.kennethcachia.com/shape-shifter/">Shape-Shifter</a> by <a
+								href="http://www.kennethcachia.com/">Kenneth Cachia</a>.</p>
+					</div>
+				</div>
+				<div class="tabs-panel ui-introduction">
+					<div class="ui-content">
+						<h2>指令 | Command</h2>
+						<p>在下方白线输入命令, 或在地址栏输入</p>
+						<span style="font-family: Consolas">
+							<a href="./?a=Hello :)"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>TEXT</b></a>: <span style="color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type anything</span><br>
+							<a href="./?a=#countdown 3"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>COUNTDOWN</b></a>: <span style="color: gray;">&nbsp;&nbsp;#countdown <i>number</i></span><br>
+							<a href="./?a=#time"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>TIME</b></a>: <span style="color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#time</span><br>
+							<a href="./?a=#rectangle 30x15"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>RECTANGLE</b></a>: <span style="color: gray;">&nbsp;&nbsp;#rectangle <i>width x height</i></span><br>
+							<a href="./?a=#circle 25"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>CIRCLE</b></a>: <span style="color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#circle <i>diameter</i></span><br>
+							<a href="./?a=Hi|#time|#circle 20"><i class="fa fa-play" aria-hidden="true"></i>
+								<b>ANIMATE</b></a>: <span style="color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;<i>command1</i>|<i>command2</i></p></span><br>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./index.js"></script>
+</body>
+
+</html>

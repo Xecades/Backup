@@ -1,0 +1,172 @@
+@import url(https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);
+@import url(https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap) screen and (max-width: 600px);
+
+html, body {
+    overflow-x: hidden;
+}
+
+#app {
+    color: #666;
+    font-family: "EB Garamond", source-han-serif-sc, "source han serif sc",
+        "source han serif cn", "source han serif tc", "source han serif tw",
+        "source han serif", "simsun", songti sc, microsoft yahei, serif;
+}
+
+.child {
+    width: 100%;
+    padding: 5rem 6rem;
+    position: absolute;
+}
+
+a {
+    color: rgb(0, 93, 146);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 1;
+}
+
+a:active {
+    opacity: 0.9;
+}
+
+rt {
+    font-weight: 500;
+    font-size: 0.7rem;
+}
+
+#title {
+    font-size: 3rem;
+    font-weight: 500;
+    height: 5rem;
+    line-height: 5rem;
+}
+
+#text {
+    font-size: 1.2rem;
+    max-width: 650px;
+    line-height: 2.2rem;
+}
+
+#text p {
+    margin-bottom: 0.7rem;
+}
+
+#text p::before {
+    content: "　　";
+}
+
+#text p.bold {
+    font-weight: bold;
+}
+
+#text.list .list p {
+    line-height: 1.4rem;
+}
+
+#text.list .list p a {
+    display: inline-block;
+    min-width: 40%;
+}
+
+#text.list .timeline .year {
+    display: block;
+    margin-bottom: 4rem;
+}
+
+#text.list .timeline .year p {
+    line-height: 1.6rem;
+    height: 1.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#text.list .timeline .year p span {
+    display: inline-block;
+    min-width: 30%;
+}
+
+#text.list .timeline .year .date {
+    z-index: -1;
+    position: absolute;
+	font-size: 5rem;
+	font-weight: bold;
+	color: #ededed;
+	transform: rotate(-90deg) translate(-3.2rem, -5.5rem);
+	height: 5rem;
+	line-height: 5rem;
+}
+
+.fade-enter-active {
+    transition: all 0.3s ease-in;
+}
+
+.fade-leave-active {
+    transition: all 0.3s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #cursor {
+        display: none !important;
+    }
+
+    #app {
+        font-family: "EB Garamond", "Noto Serif SC", source-han-serif-sc,
+            "source han serif sc", "source han serif cn", "source han serif tc",
+            "source han serif tw", "source han serif", "simsun", songti sc,
+            microsoft yahei, serif;
+    }
+
+    .child {
+        padding: 2rem 3rem;
+    }
+
+    #title {
+        font-size: 2.5rem;
+    }
+
+    #text {
+        font-size: 1rem;
+    }
+
+    #text.list .list p {
+        line-height: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    #text.list .list p a {
+        display: block;
+        width: unset;
+    }
+
+    #text.list .timeline .year p {
+        margin-left: 3.6rem;
+        height: unset;
+        overflow: unset;
+        white-space: unset;
+        text-overflow: unset;
+        text-indent: -1rem;
+    }
+
+    #text.list .timeline .year p span {
+        display: none;
+    }
+
+    #text.list p::before {
+        content: "";
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        transform: unset;
+    }
+}

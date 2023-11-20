@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, maximum-scale=2">
+	<title>Xecades | Homepage</title>
+	<meta name="author" content="Xecades">
+	<meta name="description" content="Xecades's Homepage" />
+	<link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+	<script type="text/javascript" src="/BaiduAnalyze.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.xecades.xyz/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="main.min.css">
+</head>
+
+<body>
+	<header class="panel-cover"></header>
+	<div class="panel-main">
+		<div class="panel-main_inner panel-inverted">
+			<div class="panel-main_content">
+				<a href="."><img src="https://cdn.xecades.xyz/image/logo-small.png" alt="Xecades logo"
+						class="panel-cover_logo logo"></a>
+				<!--国旗图标-->
+				<a href="#" class="Weibo_icon_position"><em title="武汉加油, 中国加油!" id="myAvatar"
+						class="Weibo_icon Weibo_icon_logo"></em></a>
+				<!---->
+				<h1 class="panel-title"><a href=".">Xecades</a></h1>
+
+				<span class="panel-subtitle" id="hitokoto"><p>『祈祷中…』</p></span>
+
+				<script>
+					var state = 1;
+					var used = false;
+					var game = '<a href=https://game.xecades.xyz/ title=休闲娱乐><i class="fa fa-gamepad" aria-hidden=true></i> 游戏</a>';
+					var lab = '<a href=https://lab.xecades.xyz/ title=不要总想着玩游戏><i class="fa fa-flask" aria-hidden=true></i> LAB</a>';
+					var quote1 = 'Where There is a shell,<br>There is a way.';
+					var quote2 = '我是 Xecades<br>生于这个世纪, 将死于这个世纪';
+					function FadeOut() {
+						if (used)
+							return;
+						used = true;
+						var p = document.getElementById("hide");
+						p.className = "panel-cover_description hid";
+						setTimeout('document.getElementById("hid_btn").className = "navigation_item hid"', 400);
+						if (state & 1)
+						{
+							setTimeout('document.getElementById("hid_btn").innerHTML = lab;', 800);
+							setTimeout('document.getElementById("hide").innerHTML = quote1;', 400);
+						}
+						else
+						{
+							setTimeout('document.getElementById("hid_btn").innerHTML = game;', 800);
+							setTimeout('document.getElementById("hide").innerHTML = quote2;', 400);
+						}
+						state++;
+						setTimeout('document.getElementById("hid_btn").className = "navigation_item show"', 800);
+						setTimeout('document.getElementById("hide").className = "panel-cover_description show"', 400);
+						setTimeout('used = false;', 1200);
+					}
+				</script>
+
+				<hr class="panel-cover_divider">
+				<p class="panel-cover_description" onmouseover="FadeOut()" id="hide">我是 Xecades<br>生于这个世纪, 将死于这个世纪</p>
+				<hr class="panel-cover_divider panel-cover_divider-secondary">
+				<div class="navigation-wrapper">
+					<div>
+						<nav class="cover-navigation">
+							<ul class="navigation">
+								<li class="navigation_item"><a href="https://blog.xecades.xyz/" title="访问博客"><i
+											class="fa fa-book" aria-hidden="true"></i> 博客</a></li>
+								<li class="navigation_item" id="hid_btn"><a href="https://game.xecades.xyz/" title="休闲娱乐"><i
+											class="fa fa-gamepad" aria-hidden="true"></i> 游戏</a></li><br>
+								<li class="navigation_item"><a href="https://tool.xecades.xyz/" title="一些小工具"><i
+											class="fa fa-wrench" aria-hidden="true"></i> 工具</a></li>
+								<li class="navigation_item"><a href="https://friend.xecades.xyz/" title="朋友们"><i
+											class="fa fa-users" aria-hidden="true"></i> 友链</a></li>
+								<li class="navigation_item"><a href="https://me.xecades.xyz/" title="关于我"><i
+											class="fa fa-info-circle" aria-hidden="true"></i> 关于</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div>
+					<nav class="cover-navigation navigation--social">
+						<ul class="navigation">
+							<!-- QQ -->
+							<li class="navigation_item">
+								<a href="http://wpa.qq.com/msgrd?v=3&uin=2135174618&site=qq&menu=yes" title="QQ"
+									target="_blank" rel="noopener noreferrer">
+									<i class="social fa fa-qq"></i>
+								</a>
+							</li>
+
+							<!-- Github -->
+							<li class="navigation_item">
+								<a href="https://github.com/Xecades" title="Github" target="_blank"
+									rel="noopener noreferrer">
+									<i class="social fa fa-github"></i>
+								</a>
+							</li>
+
+							<!-- RSS -->
+							<li class="navigation_item">
+								<a href="https://blog.xecades.xyz/atom.xml" title="RSS" target="_blank"
+									rel="noopener noreferrer">
+									<i class="social fa fa-rss"></i>
+								</a>
+							</li>
+
+							<!-- Email -->
+							<li class="navigation_item">
+								<a href="mailto:a1227253013@qq.com" title="发邮件给我">
+									<i class="social fa fa-envelope"></i>
+								</a>
+							</li>
+
+							<!-- Telegram -->
+							<li class="navigation_item">
+								<a href="https://t.me/Xecades" title="Telegram" target="_blank"
+									rel="noopener noreferrer">
+									<i class="social fa fa-telegram"></i>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+				<footer class="footer">
+					<p>主页模板来自<a href="https://noisky.cn/" style="color: aliceblue;"> Noisky </a>的
+						<a href="https://github.com/noisky/Homepage" style="color: aliceblue;"> 开源项目 </a>, 十分感谢
+						<br>
+						Xecades | 2019 - 2020
+				</footer>
+			</div>
+		</div>
+		<div class="panel-cover--overlay cover-slate"></div>
+	</div>
+
+	<script type="text/javascript" src="https://cdn.xecades.xyz/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.xecades.xyz/main-page/main.min.js"></script>
+
+</body>
+
+</html>

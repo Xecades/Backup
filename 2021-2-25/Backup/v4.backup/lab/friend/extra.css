@@ -1,0 +1,153 @@
+a.lnk {
+    font-family: JetBrains;
+    color: #111;
+    background-color: #eeeeee4d;
+    transition: color .5s, background-color .5s, box-shadow .5s, text-shadow .5s, border .5s;
+    text-decoration: none;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: box-shadow .8s, background-color .8s, opacity 1.5s;
+}
+
+.container:hover {
+    background-color: white;
+}
+
+.content {
+    position: absolute;
+    text-align: center;
+    /* border: 1px solid #111; */
+}
+
+/*********************************************************/
+
+/* Smartphones (portrait and landscape) */
+/* @media only screen and (min-width : 320px) and (max-width : 480px) {} */
+
+/* Smartphones (landscape) */
+/* @media only screen and (min-width : 321px) {} */
+
+/* Smartphones (portrait) */
+/* @media only screen and (max-width : 320px) {} */
+
+/* iPads (portrait and landscape) 横竖屏 */
+/* @media only screen and (min-width : 768px) and (max-width : 1024px) {} */
+
+/* iPads (landscape) 横屏 */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+    a.lnk {
+        font-size: 20px;
+        padding: 10px 20px;
+        border: 1px solid #111;
+        margin: 5px;
+        border-radius: 15px;
+    }
+
+    a.lnk:hover {
+        text-shadow: 6px 6px 5px #111;
+        box-shadow: inset 6px 6px 10px rgb(17, 17, 17, .5);
+    }
+
+    .container {
+        width: 85%;
+        height: 80%;
+        border-radius: 20px;
+    }
+
+    .container:hover {
+        box-shadow: 0px 0px 30px rgb(17, 17, 17, .7);
+    }
+
+    .content {
+        width: 95%;
+        left: calc((100% - 95%) / 2);
+        padding-top: 50px;
+        padding-bottom: 30px;
+        margin-top: 20px;
+        word-spacing: 20px;
+        line-height: calc(20px + 10px * 2 + 10px);
+    }
+}
+
+/* iPads (portrait) 竖屏 */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+    a.lnk {
+        font-size: 30px;
+        padding: 25px 45px;
+        border: 1px solid #111;
+        border-radius: 15px;
+    }
+
+    a.lnk:hover {
+        text-shadow: 6px 6px 5px #111;
+        box-shadow: inset 6px 6px 10px rgb(17, 17, 17, .5);
+    }
+
+    .container {
+        width: 85%;
+        height: 90%;
+        border-radius: 20px;
+    }
+
+    .container:hover {
+        box-shadow: 0px 0px 30px rgb(17, 17, 17, .7);
+    }
+
+    .content {
+        width: 95%;
+        left: calc((100% - 95%) / 2);
+        padding-top: 60px;
+        padding-bottom: 30px;
+        margin-top: 60px;
+        word-spacing: 20px;
+        line-height: calc(30px + 25px * 2 + 25px);
+    }
+}
+
+/* Desktops and laptops */
+@media only screen and (min-width : 1224px) {
+    a.lnk {
+        font-size: 16px;
+        margin: 5px;
+        padding: 10px 20px;
+        border: 1px solid #111;
+        border-radius: 3px;
+    }
+
+    a.lnk:hover {
+        text-shadow: 6px 6px 5px #111;
+        box-shadow: inset 6px 6px 10px rgb(17, 17, 17, .5);
+    }
+
+    .container {
+        width: 60%;
+        height: 60%;
+        min-width: 65vh;
+        border-radius: 4px;
+    }
+
+    .container:hover {
+        box-shadow: 0px 0px 30px rgb(17, 17, 17, .7);
+    }
+
+    .content {
+        width: 64vh;
+        left: calc((100% - 64vh) / 2);
+        padding-top: 20px;
+        padding-bottom: 10px;
+        margin-top: 30px;
+        word-spacing: 5px;
+        line-height: calc(16px + 10px * 2 + 15px);
+    }
+}
+
+/* Large screens */
+/* @media only screen and (min-width : 1824px) {} */
+
+/* iPhone 4 */
+/* @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {} */

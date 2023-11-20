@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>KMP子串搜索 - Waterdrop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="转载自$SYCstudio$的文章。  前段时间学习KMP算法，感觉有些复杂，不过好歹是弄懂啦，简单地记录一下，方便以后自己回忆。">
+<meta name="keywords" content="算法,KMP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP子串搜索">
+<meta property="og:url" content="https://xecades.xyz/articles/KmpSubstringSearch.html">
+<meta property="og:site_name" content="Waterdrop">
+<meta property="og:description" content="转载自$SYCstudio$的文章。  前段时间学习KMP算法，感觉有些复杂，不过好歹是弄懂啦，简单地记录一下，方便以后自己回忆。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xecades.xyz/gallery/29.jpg">
+<meta property="og:updated_time" content="2019-08-09T09:44:21.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KMP子串搜索">
+<meta name="twitter:description" content="转载自$SYCstudio$的文章。  前段时间学习KMP算法，感觉有些复杂，不过好歹是弄懂啦，简单地记录一下，方便以后自己回忆。">
+<meta name="twitter:image" content="https://xecades.xyz/gallery/29.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="KMP子串搜索" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/note">Note</a>
+                
+                <a class="navbar-item" href="/guide">Guide</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+                <a class="navbar-item" href="/progress">Progress</a>
+                
+                <a class="navbar-item" href="/other">Others</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub Xecades" href="https://github.com/Xecades">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/29.jpg" alt="KMP子串搜索">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+			
+                <time class="level-item has-text-grey" datetime="2019-08-09T08:20:04.000Z">2019-08-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/算法/">算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    33 分钟 读完 (大约 3256 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                KMP子串搜索
+            
+        </h1>
+        <div class="content">
+            <p>转载自<a href="https://www.cnblogs.com/SYCstudio/" target="_blank" rel="noopener">$SYCstudio$</a>的<a href="https://www.cnblogs.com/SYCstudio/p/7194315.html" target="_blank" rel="noopener">文章</a>。</p>
+<blockquote>
+<p>前段时间学习KMP算法，感觉有些复杂，不过好歹是弄懂啦，简单地记录一下，方便以后自己回忆。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>首先我们来看一个例子，现在有两个字符串A和B，问你在A中是否有B，有几个？为了方便叙述，我们先给定两个字符串的值</p>
+<blockquote>
+<p>$\mathtt{A=”abcaabababaa”}$</p>
+<p>$\mathtt{B=”abab”}$</p>
+</blockquote>
+<p>那么普通的匹配是怎么操作的呢？</p>
+<p>当然就是一位一位地比啦。（下面用蓝色表示已经匹配，黑色表示匹配失败）</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic1.gif" alt></p>
+<p>但是我们发现这样匹配很浪费!</p>
+<p>为什么这么说呢，我们看到第4步：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic2.png" alt></p>
+<p>在第4步的时候，我们发现第3位上c与a不匹配，然后第五步的时候我们把B串向后移一位，再从第一个开始匹配。</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic3.png" alt></p>
+<p>这里就有一个对已知信息很大的浪费，因为根据前面的匹配结果，我们知道B串的前两位是ab，所以不管怎么移，都是不能和b匹配的,所以应该直接跳过对A串第二位的匹配，对于A串的第三位也是同理。</p>
+<p>或许这这个例子还不够经典，我们再举一个。</p>
+<blockquote>
+<p>$\mathtt{A=”\color{red}{abbaabbbabaa}”}$</p>
+<p>$\mathtt{B=”\color{red}{abbaaba}”}$</p>
+</blockquote>
+<p>在这个例子中，我们依然从第1位开始匹配，直到匹配失败：</p>
+<blockquote>
+<p>$\mathtt{\color{cyan}{abbaab}\color{black}{b}\color{red}{babba}}$</p>
+<p>$\mathtt{\color{cyan}{abbaab}\color{black}{a}}$</p>
+</blockquote>
+<p>我们发现第7位不匹配<br>那么我们若按照原来的方式继续匹配，则是把B串向后移一位，重新从第一个字符开始匹配</p>
+<blockquote>
+<p>$\mathtt{\color{red}{a\color{black}{b}baabbbabba}}$</p>
+<p>$\mathtt{\space\space\color{black}{a}\color{red}{bbaaba}}$</p>
+</blockquote>
+<p>依然不匹配，那我们就要继续往后移咯。</p>
+<p>$\huge 且住！$</p>
+<p>既然我们已经匹配了前面的6位，那么我们也就知道了A串这6位和B串的前6位是匹配的，我们能否利用这个信息来优化我们的匹配呢？</p>
+<p>也就是说，我们能不能在上面匹配失败后直接跳到：</p>
+<blockquote>
+<p>$\mathtt{\color{red}{abb\color{cyan}{a}abbbabba}}$</p>
+<p>$\mathtt{\space\space\space\space\space\space\color{red}{\color{cyan}{a}bbaaba}}$</p>
+</blockquote>
+<p>这样就可以省去很多不必要的匹配。</p>
+<hr>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>KMP算法就是解决上面的问题的，在讲述之前，我们先摆出两个概念：</p>
+<blockquote>
+<p><strong>前缀</strong>：指的是字符串的子串中从原串最前面开始的子串</p>
+<p>如abcdef的前缀有：a,ab,abc,abcd,abcde</p>
+</blockquote>
+<blockquote>
+<p><strong>后缀</strong>：指的是字符串的子串中在原串结尾处结尾的子串</p>
+<p>如abcdef的后缀有：f,ef,def,cdef,bcdef</p>
+</blockquote>
+<p>KMP算法引入了一个F数组（在很多文章中会称为next,但笔者更习惯用F，这更方便表达），F[i]表示的是前i的字符组成的这个子串<strong>最长的相同前缀后缀的长度</strong>！</p>
+<p>怎么理解呢？</p>
+<p>例如字符串aababaaba的相同前缀后缀有a和aaba，那么其中最长的就是aaba。</p>
+<hr>
+<h2 id="KMP算法的难理解之处与本文叙述的约定"><a href="#KMP算法的难理解之处与本文叙述的约定" class="headerlink" title="KMP算法的难理解之处与本文叙述的约定"></a>KMP算法的难理解之处与本文叙述的约定</h2><p>在继续我们的讲述之前，笔者首先讲一下为什么KMP算法不是很好理解。</p>
+<p>虽然说网上关于KMP算法的博客、教程很多，但笔者查阅很多资料，详细讲述过程及原理的不多，真正讲得好的文章在定义方面又有细微的不同（当然，真正写得好的文章也有，这里就不一一列举），比如说有些从1开始标号，有些next表示的是前一个而有些是当前的，通读下来，难免会混乱。</p>
+<p>那么，为了防止读者在接下来的内容中感到和笔者之前学习时同样的困惑，在这里先对下文做一些说明和约定。</p>
+<ol>
+<li>本文中，所有的字符串从0开始编号</li>
+<li>本文中，F数组（即其他文章中的next），F[i]表示0~i的字符串的最长相同前缀后缀的长度。</li>
+</ol>
+<hr>
+<h2 id="F数组的运用"><a href="#F数组的运用" class="headerlink" title="F数组的运用"></a>F数组的运用</h2><p>那么现在假设我们已经得到了F的所有值，我们如何利用F数组求解呢？</p>
+<p>我们还是先给出一个例子（笔者用了好长时间才构造出这一个比较典型的例子啊）：</p>
+<blockquote>
+<p>$\mathtt{A=”\color{red}{abaabaabbabaaabaabbabaab}”}$</p>
+<p>$\mathtt{B=”\color{red}{abaabbabaab}”}$</p>
+</blockquote>
+<p>当然读者可以通过手动模拟得出只有一个地方匹配</p>
+<blockquote>
+<p>$\mathtt{\color{black}{abaabaabbabaa}\color{green}{abaabbabaab}}$</p>
+</blockquote>
+<p>那么我们根据手动模拟，同样可以计算出各个F的值</p>
+<blockquote>
+<p>$\mathtt{B=”\color{red}{a\space b\space a\space a\space b\space b\space a\space b\space a\space a\space b}”}$</p>
+<p>$\mathtt{F=”\color{red}{0\space 0\space 1\space 1\space 2\space 0\space 1\space 2\space 3\space 4\space 5}”}$</p>
+</blockquote>
+<p>我们再用i表示当前A串要匹配的位置（即还未匹配），j表示当前B串匹配的位置（同样也是还未匹配），补充一下，若i&gt;0则说明i-1是已经匹配的啦（j同理）。</p>
+<p>首先我们还是从0开始匹配：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic4.gif" alt></p>
+<p>此时，我们发现，A的第5位和B的第5位不匹配（注意从０开始编号），此时i=5,j=5，那么我们看F[j-1]的值：</p>
+<blockquote>
+<p>$\mathtt{F[5-1]=2;}$</p>
+</blockquote>
+<p>这说明我们接下来的匹配只要从B串第２位开始（也就是第３个字符）匹配，因为前两位已经是匹配的啦，具体请看图：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic5.gif" alt></p>
+<p>然后再接着匹配：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic6.gif" alt></p>
+<p>我们又发现，A串的第13位和B串的第10位不匹配，此时i=13,j=10，那么我们看F[j-1]的值：</p>
+<blockquote>
+<p>$\mathtt{F[10-1]=4;}$</p>
+</blockquote>
+<p>这说明B串的0<del>3位是与当前(i-4)</del>(i-1)是匹配的，我们就不需要重新再匹配这部分了，把B串向后移，从Ｂ串的第４位开始匹配：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic7.gif" alt></p>
+<p>这时我们发现A串的第13位和B串的第4位依然不匹配</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic8.png" alt></p>
+<p>此时i=13,j=4，那么我们看F[j-1]的值：</p>
+<blockquote>
+<p>$\mathtt{F[4-1]=1}$</p>
+</blockquote>
+<p>这说明B串的第0位是与当前i-1位匹配的，所以我们直接从B串的第1位继续匹配：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic9.gif" alt></p>
+<p>但此时B串的第1位与A串的第13位依然不匹配</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic10.png" alt></p>
+<p>此时，i=13,j=1,所以我们看一看F[j-1]的值:</p>
+<blockquote>
+<p>$\mathtt{F[1-1]=0}$</p>
+</blockquote>
+<p>好吧，这说明已经没有相同的前后缀了，直接把B串向后移一位，直到发现B串的第0位与A串的第i位可以匹配（在这个例子中，i=13）</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic11.gif" alt></p>
+<p>再重复上面的匹配过程，我们发现，匹配成功了！</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic12.gif" alt></p>
+<p>这就是KMP算法的过程。<br>另外强调一点，当我们将B串向后移的过程其实就是i++,而当我们不动B，而是匹配的时候，就是i++,j++，这在后面的代码中会出现，这里先做一个说明。</p>
+<p>最后来一个完整版的：</p>
+<p><img src="/images/loading.jpg" data-original="/image/KmpSubstringSearch-pic13.gif" alt></p>
+<hr>
+<h2 id="F数组的求解"><a href="#F数组的求解" class="headerlink" title="F数组的求解"></a>F数组的求解</h2><p>既然已经用这么多篇幅具体阐述了如何利用F数组求解，那么如何计算出F数组呢？总不能暴力求解吧。</p>
+<p>KMP的另外一个巧妙的地方也就在这里，它利用我们上面用B匹配A的方法来计算F数组，简单点来说，<strong>$\color{red}{就是用B串匹配B串自己！}$</strong></p>
+<p>当然，因为B串==B串，所以如果直接按上面的匹配，那是毫无意义的（自己当然可以完全匹配自己啦），所以这里要变一变。</p>
+<p>因为上面已经讲过一部分了，先给出计算F的代码：</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;m;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> j=F[i<span class="hljs-number">-1</span>];</span><br><span class="line">    <span class="hljs-keyword">while</span> ((B[j+<span class="hljs-number">1</span>]!=B[i])&amp;&amp;(j&gt;=<span class="hljs-number">0</span>))</span><br><span class="line">        j=F[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (B[j+<span class="hljs-number">1</span>]==B[i])</span><br><span class="line">        F[i]=j+<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        F[i]=<span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先可以确定的几点是：</p>
+<ol>
+<li>F[0]=-1　(虽说这里应该是０，但为了方便判越界，同时为了方便判断第０位与第i位，程序中这里置为-1)</li>
+<li>这是一个从前往后的线性推导，所以在计算F[i]时可以保证F[0]~F[i-1]都是已经计算出来的了</li>
+<li>若以某一位结尾的子串不存在相同的前缀和后缀，这个位的F置为-1（这里置为-1的原因同第一条一样）</li>
+</ol>
+<p><strong>重要</strong>：另外，为了在程序中表示方便，在接下来的说明中，F[i]=0表示最长相同前缀后缀长度为１，即真实的最长相同前缀后缀＝F[i]+1。</p>
+<p>为什么要这样设置呢，因为这时F[i]代表的就不仅仅与前后缀长度有关了，它还代表着这个前缀的最后一个字符在子串B中的位置。</p>
+<p>所以，之前上面列出的F值要变一下：</p>
+<blockquote>
+<p>$\mathtt{B=”　\space a　\space b　\space a　\space a　\space b　\space b　\space a　\space b　\space a　\space a　\space b”}$</p>
+<p>$\mathtt{F=”-1 -1　\space 0　\space 0　\space 1 -1　\space 0　\space 1　\space 2　\space 3　\space 4”}$</p>
+</blockquote>
+<p>那么，我们同样可以推出，求解F的思路是：看F[i-1]这个最长相同前缀后缀的后面是否可以接i，若可以，则直接接上，若不可以，下面再说。</p>
+<p>举个例子：</p>
+<p>还是以$\mathtt{B=”\color{red}{abaabbabaab}”}$为例，我们看到第2个：</p>
+<blockquote>
+<p>$\mathtt{B=”　\space a　\space b　\space\color{red}{a}　\space a　\space b　\space b　\space a　\space b　\space a　\space a　\space b”}$</p>
+<p>$\mathtt{F=”-1 -1”}$</p>
+</blockquote>
+<p>此时这个a的前一个b的F值为-1，所以此时a不能接在b的后面（b的相同最长前缀后缀是０啊），此时，j=-1，所以我们判断B[j+1]与B[2]，即B[0]与B[2]是否一样。一样，所以F[2]=j+1=0（代表前0~2字符的最长相同前缀后缀的前缀结束处是B[0],长度为0+1=1）。</p>
+<p>再来看到第３个：</p>
+<blockquote>
+<p>$\mathtt{B=”　\space a　\space b　\space a　\space \color{red}{a}　\space b　\space b　\space a　\space b　\space a　\space a　\space b”}$</p>
+<p>$\mathtt{F=”-1 -1　\space 0”}$</p>
+</blockquote>
+<p>开始时,j=F[3-1]=0，我们发现B[j+1=1]!=B[i=3]，所以j=F[j]=-1,此时B[j+1=0]==B[i=3]，所以F[3]=j+1=0。</p>
+<p>最后举个例子，看到第４个：</p>
+<blockquote>
+<p>$\mathtt{B=”　\space a　\space b　\space a　\space a　\space \color{red}{b}　\space b　\space a　\space b　\space a　\space a　\space b”}$</p>
+<p>$\mathtt{F=”-1 -1　\space 0　\space 0”}$</p>
+</blockquote>
+<p>j首先为F[4-1]=0，我们看到B[j+1=1]==B[i]，所以F[i]=j+1=1。</p>
+<p>后面的就请读者自己慢慢推导了。再强调一遍，我们这样求出来的F值是该最长相同前缀后缀中的前缀的结束字符的数组位置（从０开始编号），如果要求最长相同前缀后缀的长度，要输出F[i]+1。</p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>求解F数组：</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;m;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> j=F[i<span class="hljs-number">-1</span>];</span><br><span class="line">    <span class="hljs-keyword">while</span> ((B[j+<span class="hljs-number">1</span>]!=B[i])&amp;&amp;(j&gt;=<span class="hljs-number">0</span>))</span><br><span class="line">        j=F[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (B[j+<span class="hljs-number">1</span>]==B[i])</span><br><span class="line">        F[i]=j+<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        F[i]=<span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用F数组寻找匹配，这里我们是每找到一个匹配就输出其开始的位置：</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">while</span> (i&lt;n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (A[i]==B[j])</span><br><span class="line">    &#123;</span><br><span class="line">        i++;</span><br><span class="line">        j++;</span><br><span class="line">        <span class="hljs-keyword">if</span> (j==m)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,i-m+<span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-comment">//注意,这里输出的位置是从1开始标号的</span></span><br><span class="line">            <span class="hljs-comment">//如果你要输出从0开始标号的位置,应该是是i-m</span></span><br><span class="line">            <span class="hljs-comment">//这份代码是我做一道题时写的</span></span><br><span class="line">            <span class="hljs-comment">//那道题要求输出的字符串位置从1开始标号</span></span><br><span class="line">            j=F[j<span class="hljs-number">-1</span>]+<span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (j==<span class="hljs-number">0</span>)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            j=F[j<span class="hljs-number">-1</span>]+<span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下内容 Update at 2019.4.26</p>
+<p>贴一个现在自己的写法，不过这里字符串是从 1 开始标号的，如果上面理解了的话不难转化。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Nxt[<span class="hljs-number">0</span>]=Nxt[<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>,j=<span class="hljs-number">0</span>;i&lt;=m;i++)<span class="hljs-comment">//构建 Next</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">while</span> (j&amp;&amp;T[j+<span class="hljs-number">1</span>]!=T[i])</span><br><span class="line">        j=Nxt[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (T[j+<span class="hljs-number">1</span>]==T[i])</span><br><span class="line">        ++j;</span><br><span class="line">    Nxt[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>,j=<span class="hljs-number">0</span>;i&lt;=n;i++)<span class="hljs-comment">//匹配</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">while</span> (j &amp;&amp; T[j+<span class="hljs-number">1</span>]!=S[i])</span><br><span class="line">        j=Nxt[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (T[j+<span class="hljs-number">1</span>]==S[i])</span><br><span class="line">        ++j;</span><br><span class="line">    <span class="hljs-keyword">if</span> (j==m)</span><br><span class="line">        Mch[i]=<span class="hljs-number">1</span>,j=Nxt[j];<span class="hljs-comment">//匹配成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>自己选择的路，跪着也要走完。朋友们，虽然这个世界日益浮躁起来，只要能够为了当时纯粹的梦想和感动坚持努力下去，不管其它人怎么样，我们也能够保持自己的本色走下去。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/KMP/">KMP</a>, <a class="has-link-grey -link" href="/tags/算法/">算法</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">--------完·谢谢阅读--------</h3>
+        <div class="buttons is-centered">
+            
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/articles/notice.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">NOTICE</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/articles/solution-p3386.html">
+                <span class="level-item">题解P3386[二分图匹配]</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '062ee929cf80fdb1d10c',
+        clientSecret: 'e854d3ee28dc91637e00dedaa74ab27d342b24c0',
+        id: '6b9f98bdd164d2bff46bdedfce2958c0',
+        repo: 'Xecades.github.io',
+        owner: 'Xecades',
+        admin: "Xecades"
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://www.gravatar.com/avatar/57aa3b881171b63020990cb8a2924932?s=128" alt="Xecades">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Xecades
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        时间之外·即为永恒
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>中国·四川·德阳</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        29
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        28
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Xecades" target="_blank">
+                SEGUIR</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/Xecades">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="E-Mail" href="mailto:a1227253013@qq.com">
+                
+                <i class="fas fa-envelope"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="QQ" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2135174618&amp;site=qq&amp;menu=yes">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="洛谷" href="https://www.luogu.org/space/show?uid=64434">
+                
+                <i class="fas fa-spinner"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="洛谷博客" href="https://tlblog.blog.luogu.org/#">
+                
+                <i class="fas fa-th-large"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接 &amp; 友链
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/Xecades" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Xecades</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.luogu.org/space/show?uid=64434" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Luogu</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.luogu.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://decorationqwq.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">DecoBlog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">decorationqwq.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.lemir3.red/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Lemir3Blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.lemir3.red</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://zsx6.com/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">MMMsc0.618Blog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">zsx6.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://socialzxy.github.io/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">SocialistZhaoBlog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">socialzxy.github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- 标签球 -->
+
+<div class="card widget">
+    <div class="card-content">
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="menu-label">
+                标签球
+            </h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="230" height="250" id="resCanvas" style="width=100%">
+					<a href="/tags/C-11/" style="font-size: 12.5px;">C++11</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/KMP/" style="font-size: 12.5px;">KMP</a> <a href="/tags/NOIP/" style="font-size: 10px;">NOIP</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二进制/" style="font-size: 12.5px;">二进制</a> <a href="/tags/位运算/" style="font-size: 12.5px;">位运算</a> <a href="/tags/字符串/" style="font-size: 12.5px;">字符串</a> <a href="/tags/库函数/" style="font-size: 10px;">库函数</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据结构/" style="font-size: 17.5px;">数据结构</a> <a href="/tags/数论/" style="font-size: 12.5px;">数论</a> <a href="/tags/模拟/" style="font-size: 12.5px;">模拟</a> <a href="/tags/滑稽/" style="font-size: 12.5px;">滑稽</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/类/" style="font-size: 17.5px;">类</a> <a href="/tags/背包/" style="font-size: 10px;">背包</a> <a href="/tags/英文/" style="font-size: 10px;">英文</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/难度★★★☆☆/" style="font-size: 12.5px;">难度★★★☆☆</a> <a href="/tags/难度★★☆☆☆/" style="font-size: 12.5px;">难度★★☆☆☆</a> <a href="/tags/难度★☆☆☆☆/" style="font-size: 15px;">难度★☆☆☆☆</a> <a href="/tags/题解/" style="font-size: 20px;">题解</a> <a href="/tags/高精度/" style="font-size: 10px;">高精度</a>
+				</canvas>
+			</div>
+		</div>
+	</div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C-11/">
+            <span class="level-start">
+                <span class="level-item">C++11</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DP/">
+            <span class="level-start">
+                <span class="level-item">DP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/STL/">
+            <span class="level-start">
+                <span class="level-item">STL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/博客/">
+            <span class="level-start">
+                <span class="level-item">博客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数论/">
+            <span class="level-start">
+                <span class="level-item">数论</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法/">
+            <span class="level-start">
+                <span class="level-item">算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/随笔/">
+            <span class="level-start">
+                <span class="level-item">随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <!-- 见links.ejs文件 -->
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#引入">
+        <span class="has-mr-6">1</span>
+        <span>引入</span>
+        </a></li><li>
+        <a class="is-flex" href="#KMP算法">
+        <span class="has-mr-6">2</span>
+        <span>KMP算法</span>
+        </a></li><li>
+        <a class="is-flex" href="#KMP算法的难理解之处与本文叙述的约定">
+        <span class="has-mr-6">3</span>
+        <span>KMP算法的难理解之处与本文叙述的约定</span>
+        </a></li><li>
+        <a class="is-flex" href="#F数组的运用">
+        <span class="has-mr-6">4</span>
+        <span>F数组的运用</span>
+        </a></li><li>
+        <a class="is-flex" href="#F数组的求解">
+        <span class="has-mr-6">5</span>
+        <span>F数组的求解</span>
+        </a></li><li>
+        <a class="is-flex" href="#代码">
+        <span class="has-mr-6">6</span>
+        <span>代码</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/articles/notice.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/30.jpg" alt="NOTICE">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-10T05:28:31.000Z">2019-08-10</time></div>
+                    <a href="/articles/notice.html" class="has-link-black-ter is-size-6">NOTICE</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/KmpSubstringSearch.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/29.jpg" alt="KMP子串搜索">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T08:20:04.000Z">2019-08-09</time></div>
+                    <a href="/articles/KmpSubstringSearch.html" class="has-link-black-ter is-size-6">KMP子串搜索</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/solution-p3386.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/28.jpg" alt="题解P3386[二分图匹配]">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T00:42:51.000Z">2019-08-09</time></div>
+                    <a href="/articles/solution-p3386.html" class="has-link-black-ter is-size-6">题解P3386[二分图匹配]</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/KmpVideo.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/27.jpg" alt="KMP子串搜索视频演示">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-04T02:59:33.000Z">2019-08-04</time></div>
+                    <a href="/articles/KmpVideo.html" class="has-link-black-ter is-size-6">KMP子串搜索视频演示</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/plan.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="近期学习计划">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-02T13:52:27.000Z">2019-08-02</time></div>
+                    <a href="/articles/plan.html" class="has-link-black-ter is-size-6">近期学习计划</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/KMP/">
+                        <span class="tag">KMP</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NOIP/">
+                        <span class="tag">NOIP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分图/">
+                        <span class="tag">二分图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二进制/">
+                        <span class="tag">二进制</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/位运算/">
+                        <span class="tag">位运算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字符串/">
+                        <span class="tag">字符串</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/库函数/">
+                        <span class="tag">库函数</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/教程/">
+                        <span class="tag">教程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/模拟/">
+                        <span class="tag">模拟</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滑稽/">
+                        <span class="tag">滑稽</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/矩阵/">
+                        <span class="tag">矩阵</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/类/">
+                        <span class="tag">类</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/背包/">
+                        <span class="tag">背包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/英文/">
+                        <span class="tag">英文</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随笔/">
+                        <span class="tag">随笔</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★★☆☆/">
+                        <span class="tag">难度★★★☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★☆☆☆/">
+                        <span class="tag">难度★★☆☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★☆☆☆☆/">
+                        <span class="tag">难度★☆☆☆☆</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/题解/">
+                        <span class="tag">题解</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高精度/">
+                        <span class="tag">高精度</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#引入">
+        <span class="has-mr-6">1</span>
+        <span>引入</span>
+        </a></li><li>
+        <a class="is-flex" href="#KMP算法">
+        <span class="has-mr-6">2</span>
+        <span>KMP算法</span>
+        </a></li><li>
+        <a class="is-flex" href="#KMP算法的难理解之处与本文叙述的约定">
+        <span class="has-mr-6">3</span>
+        <span>KMP算法的难理解之处与本文叙述的约定</span>
+        </a></li><li>
+        <a class="is-flex" href="#F数组的运用">
+        <span class="has-mr-6">4</span>
+        <span>F数组的运用</span>
+        </a></li><li>
+        <a class="is-flex" href="#F数组的求解">
+        <span class="has-mr-6">5</span>
+        <span>F数组的求解</span>
+        </a></li><li>
+        <a class="is-flex" href="#代码">
+        <span class="has-mr-6">6</span>
+        <span>代码</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/articles/notice.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/30.jpg" alt="NOTICE">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-10T05:28:31.000Z">2019-08-10</time></div>
+                    <a href="/articles/notice.html" class="has-link-black-ter is-size-6">NOTICE</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/KmpSubstringSearch.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/29.jpg" alt="KMP子串搜索">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T08:20:04.000Z">2019-08-09</time></div>
+                    <a href="/articles/KmpSubstringSearch.html" class="has-link-black-ter is-size-6">KMP子串搜索</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/solution-p3386.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/28.jpg" alt="题解P3386[二分图匹配]">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-09T00:42:51.000Z">2019-08-09</time></div>
+                    <a href="/articles/solution-p3386.html" class="has-link-black-ter is-size-6">题解P3386[二分图匹配]</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/KmpVideo.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/27.jpg" alt="KMP子串搜索视频演示">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-04T02:59:33.000Z">2019-08-04</time></div>
+                    <a href="/articles/KmpVideo.html" class="has-link-black-ter is-size-6">KMP子串搜索视频演示</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/articles/plan.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/5.jpg" alt="近期学习计划">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-02T13:52:27.000Z">2019-08-02</time></div>
+                    <a href="/articles/plan.html" class="has-link-black-ter is-size-6">近期学习计划</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/随笔/">随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/KMP/">
+                        <span class="tag">KMP</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NOIP/">
+                        <span class="tag">NOIP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分图/">
+                        <span class="tag">二分图</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二进制/">
+                        <span class="tag">二进制</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/位运算/">
+                        <span class="tag">位运算</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/字符串/">
+                        <span class="tag">字符串</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/库函数/">
+                        <span class="tag">库函数</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/教程/">
+                        <span class="tag">教程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/模拟/">
+                        <span class="tag">模拟</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/滑稽/">
+                        <span class="tag">滑稽</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/矩阵/">
+                        <span class="tag">矩阵</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/类/">
+                        <span class="tag">类</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/背包/">
+                        <span class="tag">背包</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/英文/">
+                        <span class="tag">英文</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随笔/">
+                        <span class="tag">随笔</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★★☆☆/">
+                        <span class="tag">难度★★★☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★★☆☆☆/">
+                        <span class="tag">难度★★☆☆☆</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/难度★☆☆☆☆/">
+                        <span class="tag">难度★☆☆☆☆</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/题解/">
+                        <span class="tag">题解</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高精度/">
+                        <span class="tag">高精度</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="KMP子串搜索" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Xecades&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次<span class="post-meta-divider">  |  </span></span>本站访客数<span id="busuanzi_value_site_uv"></span>人次
+                
+				<br>
+				
+				<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+				<script>
+					var now = new Date(); 
+  				    function createtime() { 
+      					var grt= new Date("1/13/2019 17:49:00");
+      					now.setTime(now.getTime()+250); 
+       					days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+      					hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+      					if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+       					mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+       					seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+       					snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+       					document.getElementById("timeDate").innerHTML = "Xecades的博客已存活 "+dnum+" 天 "; 
+       					document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+   					} 
+					setInterval("createtime()",250);
+				</script>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+<script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script></body>
+</html>

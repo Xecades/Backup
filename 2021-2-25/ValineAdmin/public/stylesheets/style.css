@@ -1,0 +1,225 @@
+@import url(https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,500&family=Noto+Serif+SC:wght@300;400;500;700&display=swap);
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+* {
+    font-family: "EB Garamond", "Noto Serif SC", source-han-serif-sc,
+        "source han serif sc", "source han serif cn", "source han serif tc",
+        "source han serif tw", "source han serif", songti sc, microsoft yahei,
+        serif;
+}
+
+*::-moz-selection {
+    background-color: rgba(187, 221, 251, 0.5);
+}
+*::selection {
+    background-color: rgba(187, 221, 251, 0.5);
+}
+
+a {
+    text-decoration: none;
+    color: #006faa;
+    opacity: .7;
+    transition: opacity .2s;
+}
+
+a:hover {
+    opacity: 1;
+}
+
+.footer {
+    font-size: 0.8rem;
+}
+
+.title {
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+.content {
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comment-main {
+    padding: 3rem 7rem;
+}
+
+@media screen and (max-width: 700px) {
+    .comment-main {
+        padding: 2rem 2rem !important;
+    }
+}
+
+.logout-wrapper {
+    width: 6rem;
+    text-align: right;
+}
+
+.vhead {
+    line-height: 2rem;
+}
+
+.vhead a,
+.vhead #nick {
+    font-weight: bolder;
+    color: #333;
+    opacity: 1;
+}
+
+.spacer {
+    color: #ccc;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+
+.vtime {
+    color: #a9a4a4;
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.vcomment {
+    line-height: 1.8;
+    word-wrap: break-word;
+}
+
+.vcomment pre {
+    overflow: scroll;
+    background: #f8fbfd;
+    padding: 1rem;
+}
+
+.vcomment blockquote {
+    border-left: 5px solid #eee;
+    margin-left: 0;
+    padding-left: 15px;
+}
+
+.vcomment pre * {
+    font-family: monospace;
+}
+
+.vemoticon-img {
+    max-height: 40px;
+}
+
+.vcard {
+    padding: 2rem 0 2rem 0;
+    border-top: 1px solid #dedede;
+}
+
+.check {
+    padding-top: 1rem;
+    line-height: 2rem;
+    color: #33b1ff;
+}
+
+.sign-in-wrap {
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    color: #738a94;
+    font-weight: 100;
+    text-align: center;
+    align-items: center;
+    top: 40%;
+    transform: translate(0, -50%);
+}
+
+.gh-signup {
+    width: 600px !important;
+}
+
+.gh-signin {
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 18px 36px;
+    margin: 15px;
+    width: 320px;
+    border: 1px solid #dae1e3;
+    border-radius: 10px;
+    text-align: left;
+}
+
+@media screen and (max-width: 422px) {
+    .gh-signin {
+        width: calc(100vw - 2 * 36px - 2 * 15px);
+    }
+}
+
+.gh-signin .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.sign-in-wrap input {
+    padding: 10px;
+    margin: 1rem 0;
+    border: 1px solid #dae1e3;
+    font-size: 1rem;
+    line-height: 1.5em;
+    font-weight: 100;
+    display: block;
+    user-select: text;
+    border-radius: 4px;
+    transition: border-color 0.15s linear;
+    -webkit-appearance: none;
+    color: #4b5b62;
+    -webkit-user-select: text;
+}
+
+.sign-in-wrap input:focus {
+    border-color: #c4c8cb;
+    outline: 0;
+}
+
+.sign-in-wrap .login-button {
+    padding: 8px 10px;
+    cursor: pointer;
+    background: #33b1ff;
+    border: 0.1rem solid #33b1ff;
+    border-radius: 0.2rem;
+    color: #fff;
+}
+
+.red {
+    color: #ee1000;
+}
+
+.blue {
+    padding-left: 9px;
+    color: #33b1ff;
+}

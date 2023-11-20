@@ -1,0 +1,59 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    position: absolute;
+    display: table;
+    -webkit-transition: opacity .4s;
+    -o-transition: opacity .4s;
+    transition: opacity .4s;
+    font-family: arial;
+}
+
+#panel {
+    background-attachment: fixed;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    -webkit-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+    zoom: 1;
+}
+
+#panel .p_title {
+    display: block;
+    padding-top: 2rem;
+    width: 21rem;
+    height: 8rem;
+}
+
+#panel .p_title path {
+    -webkit-transition: fill .4s;
+    -o-transition: fill .4s;
+    transition: fill .4s;
+}
+
+#panel .p_title .titleImg {
+    height: 8rem;
+    color: #eee;
+}
+
+#tool {
+    position: fixed;
+    top: .6rem;
+    right: 1rem;
+    opacity: .4;
+    font-size: 2rem;
+    line-height: 2rem;
+    z-index: 12345;
+    -webkit-transition: opacity .4s, color .2s;
+    -o-transition: opacity .4s, color .2s;
+    transition: opacity .4s, color .2s;
+}
+
+#tool:hover {
+    opacity: 1;
+}

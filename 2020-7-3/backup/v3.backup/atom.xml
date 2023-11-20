@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Xecades</title>
+  <icon>https://xecades.xyz/https://s2.ax1x.com/2019/08/10/eOLcH1.png</icon>
+  <subtitle>Xecades&#39;s Blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://xecades.xyz/"/>
+  <updated>2020-01-23T02:10:57.359Z</updated>
+  <id>https://xecades.xyz/</id>
+  
+  <author>
+    <name>Xecades</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>颓文化课</title>
+    <link href="https://xecades.xyz//articles/AcademicSubject.html"/>
+    <id>https://xecades.xyz//articles/AcademicSubject.html</id>
+    <published>2020-01-23T00:54:41.000Z</published>
+    <updated>2020-01-23T02:10:57.359Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;记录一下一些好玩的题&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="文化课" scheme="https://xecades.xyz/categories/%E6%96%87%E5%8C%96%E8%AF%BE/"/>
+    
+    
+      <category term="文化课" scheme="https://xecades.xyz/tags/%E6%96%87%E5%8C%96%E8%AF%BE/"/>
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>生命游戏 | 元胞自动机</title>
+    <link href="https://xecades.xyz//articles/LifeGame.html"/>
+    <id>https://xecades.xyz//articles/LifeGame.html</id>
+    <published>2020-01-17T12:42:46.000Z</published>
+    <updated>2020-01-18T10:38:01.705Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;blockquote&gt;
+&lt;p&gt;元胞自动机(cellular automata,CA)是一种时间、空间、状态都离散，空间相互作用和时间因果关系为局部的网格动力学模型，具有模拟复杂系统时空演化过程的能力。&lt;/p&gt;
+
+&lt;p&gt;具体来说，这是康威生命游戏，属于元胞自动机，这是一个零玩家游戏(说白了就是别想玩它，没有玩家)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/image/LifeGame-pic1.gif&quot; title=&quot;图片来自Wikipedia&quot; class=&quot;gallery-item&quot;&gt;&lt;img src=&quot;/image/LifeGame-pic1.gif&quot; alt=&quot;图片来自Wikipedia&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="捣鼓" scheme="https://xecades.xyz/categories/%E6%8D%A3%E9%BC%93/"/>
+    
+    
+      <category term="捣鼓" scheme="https://xecades.xyz/tags/%E6%8D%A3%E9%BC%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分形</title>
+    <link href="https://xecades.xyz//articles/fractal.html"/>
+    <id>https://xecades.xyz//articles/fractal.html</id>
+    <published>2020-01-17T05:43:45.000Z</published>
+    <updated>2020-01-18T09:22:08.852Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;寒假的研究性学习……&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://s2.ax1x.com/2020/01/18/1SqsPK.gif&quot; title=&quot;弦图分形&quot; class=&quot;gallery-item&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;img src=&quot;https://s2.ax1x.com/2020/01/18/1SqsPK.gif&quot; alt=&quot;弦图分形&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="捣鼓" scheme="https://xecades.xyz/categories/%E6%8D%A3%E9%BC%93/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="捣鼓" scheme="https://xecades.xyz/tags/%E6%8D%A3%E9%BC%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Q - 佬鼠喝药水</title>
+    <link href="https://xecades.xyz//articles/Question1.html"/>
+    <id>https://xecades.xyz//articles/Question1.html</id>
+    <published>2019-12-28T11:54:20.000Z</published>
+    <updated>2019-12-28T13:55:11.886Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;p&gt;你面前有100瓶药水，标号1~100。其中只有一瓶毒药，其余都是农夫山泉。&lt;/p&gt;
+&lt;p&gt;这瓶毒药比较特殊，喝了它并不会立即死掉，而是会在第二天&lt;strong&gt;立刻同时&lt;/strong&gt;显现药性（就是死掉），也就是说，第二天喝过毒药的生物都会死去，而第一天全部安然无恙。&lt;/p&gt;
+&lt;p&gt;你有7只佬鼠，编号1~7，每只佬鼠可以喝下无限量的药水，而且每瓶药水无限供应。&lt;/p&gt;
+&lt;p&gt;假定你有无限的计算能力，只要信息足够，你可以在一瞬间计算出是哪一瓶药水有毒。&lt;/p&gt;
+&lt;p&gt;问：如何仅通过这7只佬鼠，在第二天到来后，根据它们的死活找出那一瓶毒药，&lt;del&gt;并把它喝掉&lt;/del&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="题目" scheme="https://xecades.xyz/categories/%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="题目" scheme="https://xecades.xyz/tags/%E9%A2%98%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>约数个数/和定理</title>
+    <link href="https://xecades.xyz//articles/SigmaTheorem.html"/>
+    <id>https://xecades.xyz//articles/SigmaTheorem.html</id>
+    <published>2019-11-10T15:04:17.000Z</published>
+    <updated>2020-01-17T05:46:08.385Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;求一个数的约数之和，以及约数个数&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>四位保存除法</title>
+    <link href="https://xecades.xyz//articles/divide.html"/>
+    <id>https://xecades.xyz//articles/divide.html</id>
+    <published>2019-11-10T14:53:53.000Z</published>
+    <updated>2020-01-17T05:46:08.382Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;用于高精除以低精（貌似没什么用）&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>手动开平方</title>
+    <link href="https://xecades.xyz//articles/sqrt.html"/>
+    <id>https://xecades.xyz//articles/sqrt.html</id>
+    <published>2019-11-10T14:50:52.000Z</published>
+    <updated>2020-01-17T05:46:08.383Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;$\sqrt n$可以用如下方法计算&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快读</title>
+    <link href="https://xecades.xyz//articles/FastRead.html"/>
+    <id>https://xecades.xyz//articles/FastRead.html</id>
+    <published>2019-11-10T14:31:08.000Z</published>
+    <updated>2020-01-16T10:54:26.111Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;就是我常用的快读模板和解析&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="杂项" scheme="https://xecades.xyz/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="优化" scheme="https://xecades.xyz/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前缀和</title>
+    <link href="https://xecades.xyz//articles/prefix.html"/>
+    <id>https://xecades.xyz//articles/prefix.html</id>
+    <published>2019-11-10T09:35:54.000Z</published>
+    <updated>2019-11-10T14:30:19.833Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;一维前缀和预处理$O(n)$，二维$O(n^2)$，查询都是$O(1)$&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三体经典语录</title>
+    <link href="https://xecades.xyz//articles/ThreeBody.html"/>
+    <id>https://xecades.xyz//articles/ThreeBody.html</id>
+    <published>2019-08-31T08:38:47.000Z</published>
+    <updated>2020-01-17T02:04:56.438Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;作为一个科幻迷，记录下刘慈欣小说的经典语录&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="杂项" scheme="https://xecades.xyz/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="随笔" scheme="https://xecades.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>转 - KMP子串搜索</title>
+    <link href="https://xecades.xyz//articles/KmpSubstringSearch.html"/>
+    <id>https://xecades.xyz//articles/KmpSubstringSearch.html</id>
+    <published>2019-08-09T08:20:04.000Z</published>
+    <updated>2020-01-11T15:54:11.215Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;blockquote&gt;
+&lt;p&gt;前段时间学习KMP算法，感觉有些复杂，不过好歹是弄懂啦，简单地记录一下，方便以后自己回忆。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="KMP" scheme="https://xecades.xyz/tags/KMP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>题解P3386[二分图匹配]</title>
+    <link href="https://xecades.xyz//articles/solution-p3386.html"/>
+    <id>https://xecades.xyz//articles/solution-p3386.html</id>
+    <published>2019-08-09T00:42:51.000Z</published>
+    <updated>2020-01-18T09:20:56.423Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/problemnew/show/P3386&quot; class=&quot;LinkCard&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目来源P3386&lt;/a&gt;&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="题解" scheme="https://xecades.xyz/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="题解" scheme="https://xecades.xyz/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="二分图" scheme="https://xecades.xyz/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KMP视频讲解</title>
+    <link href="https://xecades.xyz//articles/KmpVideo.html"/>
+    <id>https://xecades.xyz//articles/KmpVideo.html</id>
+    <published>2019-08-04T02:59:33.000Z</published>
+    <updated>2019-12-28T13:30:00.267Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;一定要等博客看了好几遍都看不懂才来看视频，因为视频太容易懂了，让人缺少思考的过程&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="KMP" scheme="https://xecades.xyz/tags/KMP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数论 - OwO的讲课笔记</title>
+    <link href="https://xecades.xyz//articles/NumberTheory.html"/>
+    <id>https://xecades.xyz//articles/NumberTheory.html</id>
+    <published>2019-07-30T11:56:38.000Z</published>
+    <updated>2020-01-18T09:17:52.356Z</updated>
+    
+    <summary type="html">
+    
+      🔒文章已加密，欲查看请输入密码
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bitset类</title>
+    <link href="https://xecades.xyz//articles/bitset.html"/>
+    <id>https://xecades.xyz//articles/bitset.html</id>
+    <published>2019-07-24T10:45:44.000Z</published>
+    <updated>2019-12-28T13:03:33.808Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;&lt;code&gt;bitset&lt;/code&gt;是一种类似数组的结构，包含于头文件&lt;code&gt;bitset&lt;/code&gt;，它的每一个元素只能是$0$或$1$，每个元素仅占用$1\space bit$的空间&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="STL" scheme="https://xecades.xyz/categories/STL/"/>
+    
+    
+      <category term="STL" scheme="https://xecades.xyz/tags/STL/"/>
+    
+      <category term="数据结构" scheme="https://xecades.xyz/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>运算符优先级</title>
+    <link href="https://xecades.xyz//articles/PriorityLevel.html"/>
+    <id>https://xecades.xyz//articles/PriorityLevel.html</id>
+    <published>2019-07-11T22:43:08.000Z</published>
+    <updated>2019-12-28T13:30:15.397Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;运算符优先级描述在计算表达式时执行运算的先后顺序。先执行较高优先级的运算，然后执行较低优先级的运算。例如，先执行乘和除，再执行加减运算。&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="杂项" scheme="https://xecades.xyz/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+      <category term="C++11" scheme="https://xecades.xyz/tags/C-11/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>转 - 矩阵乘法</title>
+    <link href="https://xecades.xyz//articles/matrix.html"/>
+    <id>https://xecades.xyz//articles/matrix.html</id>
+    <published>2019-07-11T05:05:04.000Z</published>
+    <updated>2020-01-17T05:46:08.385Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;另，$1\times m$的矩阵又叫做向量&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数学" scheme="https://xecades.xyz/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="矩阵" scheme="https://xecades.xyz/tags/%E7%9F%A9%E9%98%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高精度计算代码</title>
+    <link href="https://xecades.xyz//articles/BigNumCalc.html"/>
+    <id>https://xecades.xyz//articles/BigNumCalc.html</id>
+    <published>2019-06-30T01:50:50.000Z</published>
+    <updated>2019-11-16T14:36:53.382Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;列举一些常用的高精度计算代码&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="高精度" scheme="https://xecades.xyz/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/"/>
+    
+      <category term="算法" scheme="https://xecades.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态规划-01背包问题</title>
+    <link href="https://xecades.xyz//articles/Backpack.html"/>
+    <id>https://xecades.xyz//articles/Backpack.html</id>
+    <published>2019-06-28T11:21:36.000Z</published>
+    <updated>2019-12-28T13:02:22.442Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;有$N$件物品和一容量为$V$的背包。第$i$件物品的费用为&lt;code&gt;c[i]&lt;/code&gt;，价值为&lt;code&gt;w[i]&lt;/code&gt;。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;这是一道$01$背包的题，这个问题的特点是：每种物品只有一件，可以选择放或者不放。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="DP" scheme="https://xecades.xyz/categories/DP/"/>
+    
+    
+      <category term="DP" scheme="https://xecades.xyz/tags/DP/"/>
+    
+      <category term="背包" scheme="https://xecades.xyz/tags/%E8%83%8C%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>位运算的应用</title>
+    <link href="https://xecades.xyz//articles/BitwiseOperationUsage.html"/>
+    <id>https://xecades.xyz//articles/BitwiseOperationUsage.html</id>
+    <published>2019-06-27T00:25:32.000Z</published>
+    <updated>2020-01-01T10:12:10.383Z</updated>
+    
+    <summary type="html">
+    
+      &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css&quot;&gt;&lt;div class=&quot;.article-gallery&quot; &lt;p&gt;&lt;a href=&quot;../../articles/BitwiseOperation.html&quot; class=&quot;LinkCard&quot;&gt;位运算的操作&lt;/a&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;本文介绍位运算的简单应用及性质&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://xecades.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="位运算" scheme="https://xecades.xyz/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+      <category term="二进制" scheme="https://xecades.xyz/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/"/>
+    
+  </entry>
+  
+</feed>

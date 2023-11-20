@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>转 - 矩阵乘法 | Xecades</title>
+  
+  <meta name="keywords" content="Xecades">
+  
+  
+  <meta name="description" content="像墓碑一样简洁">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="Xecades">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://s2.ax1x.com/2019/08/10/eOLcH1.png">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='https://i.loli.net/2019/08/10/AfyZ2zrELuw9GDj.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="Search" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;文章
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/note/"
+            
+            
+            id="note">
+            <i class='fa fa-sticky-note fa-fw'></i>&nbsp;笔记
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/progress/"
+            
+              rel="nofollow"
+            
+            
+            id="progress">
+            <i class='fa fa-calendar fa-fw'></i>&nbsp;时光
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/knowledge/"
+            
+              rel="nofollow"
+            
+            
+            id="knowledge">
+            <i class='fa fa-book fa-fw'></i>&nbsp;知识
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/CodeEditor/"
+            
+              rel="nofollow"
+            
+            
+            id="CodeEditor">
+            <i class='fa fa-code fa-fw'></i>&nbsp;编辑器
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tool/"
+            
+              rel="nofollow"
+            
+            
+            id="tool">
+            <i class='fa fa-star fa-fw'></i>&nbsp;收藏夹
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/"
+            
+              rel="nofollow"
+            
+            
+            id="friends">
+            <i class='fas fa-link fa-fw'></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fa fa-id-card fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header material">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="material"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Xecades
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/CodeEditor/"
+                
+                  rel="nofollow"
+                
+                
+                id="CodeEditor">
+								<i class='fa fa-code fa-fw'></i>&nbsp;编辑代码
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于作者
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/articles/matrix.html">
+        转 - 矩阵乘法
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://xecades.xyz" rel="nofollow">
+      
+        <img src="https://i.loli.net/2019/08/10/tL3xw6mQ5rRnYlo.png">
+      
+      <p>Xecades</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/算法/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>算法</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p>一个$m×n$的矩阵就是$m×n$个数排成$m$行$n$列的一个数阵。矩阵可以用于批量解决一些线性问题，例如递推方程。<p></p>
+<p>另，$1\times m$的矩阵又叫做向量</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="啥是矩阵乘法"><a href="#啥是矩阵乘法" class="headerlink" title="啥是矩阵乘法"></a>啥是矩阵乘法</h2><p>蒟阵乘法，顾名思义，就是两个矩阵(蒟蒻)乘起来，不过和普通的乘法不一样。</p>
+<h3 id="A-两个矩阵能相乘的条件"><a href="#A-两个矩阵能相乘的条件" class="headerlink" title="A.两个矩阵能相乘的条件"></a>A.两个矩阵能相乘的条件</h3><p>当一个矩阵的行数等于另一个矩阵的列数时，两个相乘才有意义。</p>
+<h3 id="B-矩阵咋相乘"><a href="#B-矩阵咋相乘" class="headerlink" title="B.矩阵咋相乘"></a>B.矩阵咋相乘</h3><p>三个矩阵$a,b,c$</p>
+<p>如果$a$等于$bc$的乘积，那么写作$a=bc$</p>
+<p>假设$b,c$都是$n\times n$的矩阵，那么有</p>
+<p>$$a_{ij}=\sum^n_{k=1}b_{ik}\times c_{kj}$$</p>
+<p>写成矩阵的形式就是</p>
+<p>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix}=\begin{bmatrix} a\times e+b\times g &amp; a\times f+b\times h \\ c\times e+d\times g &amp; c\times f+d\times h\end{bmatrix}$$</p>
+<p>这也就是为什么必须要求一个矩阵的行数等于另一个矩阵的列数，否则元素数不相等</p>
+<h3 id="C-注意事项"><a href="#C-注意事项" class="headerlink" title="C.注意事项"></a>C.注意事项</h3><p>如果两个大小为$a\times n,n\times m$的矩阵相乘,最后乘出来的矩阵就是是$a\times m$的</p>
+<p>而矩阵乘法的次数就是$a\times n\times m$</p>
+<p>例如$2\times 3$和$3\times 2$的矩阵相乘</p>
+<p>$$\left[\begin{array}{lll}{1} &amp; {2} &amp; {3} \\ {4} &amp; {5} &amp; {6}\end{array}\right]\left[\begin{array}{ll}{1} &amp; {4} \\ {2} &amp; {5} \\ {3} &amp; {6}\end{array}\right]=\left[\begin{array}{lll}{1 \times  1+2 \times  2+3} &amp; {1 \times  4+2 \times  5+3+3+3} \\ {4 \times  1+5 \times  2+6 \times  3} &amp; {4 \times  4+5 \times  5+6 \times  6}\end{array}\right]$$</p>
+<p>如果问原因的话，我们可以发现，新矩阵的行数和左边矩阵的行数相等，而新矩阵的列数和后边矩阵的列数相等。</p>
+<h3 id="D-这东西有啥性质啊"><a href="#D-这东西有啥性质啊" class="headerlink" title="D.这东西有啥性质啊"></a>D.这东西有啥性质啊</h3><ol>
+<li><p>矩阵乘法满足结合律，即$a(bc)=(ab)c$，可以通过这个性质减少乘法次数</p>
+</li>
+<li><p>而且，矩阵乘法没有交换律<br>因为普通的加法和乘法满足交换律的原因是因为加法和乘法的结果都只是一个数,而矩阵的本质是数的排列,所以运算结果还是矩阵，并不是一个数，自然和数有区别</p>
+</li>
+<li><p>矩阵的单位元…<del>这东西也不知道放在哪，就写这吧。</del></p>
+<p>$\left[\begin{array}{lll}{1} &amp; {0} &amp; {0} \\ {0} &amp; {1} &amp; {0} \\ {0} &amp; {0} &amp; {1}\end{array}\right]$就是对角线上全为1</p>
+</li>
+</ol>
+<hr>
+<h2 id="这玩意有啥用"><a href="#这玩意有啥用" class="headerlink" title="这玩意有啥用"></a>这玩意有啥用</h2><p>我咋知道啊</p>
+<p>在某些题中可以加速递推公式，可以把一个$O(n)$的式子优化到$O(logn)$</p>
+<h4 id="应用前提：矩阵快速幂-这又是啥啊"><a href="#应用前提：矩阵快速幂-这又是啥啊" class="headerlink" title="应用前提：矩阵快速幂(这又是啥啊)"></a>应用前提：矩阵快速幂(这又是啥啊)</h4><p>因为矩阵的乘法也有结合律，所以也可以用快速幂加速，也是矩阵优化递推的原理，即把一个不能用快速幂优化的式子转换成快速幂的形式</p>
+<hr>
+<h2 id="来个栗子啊"><a href="#来个栗子啊" class="headerlink" title="来个栗子啊"></a>来个栗子啊</h2><p>出门左转炒锅</p>
+<p>$$f(n) = f(n-1) + f(n-2)　(n\geq 2且n\in\mathbb{Z})$$</p>
+<p>请你求出$f(n)\mod10^9+7$的值($n$在$longlong$($INT64$)范围内)。</p>
+<p>显然线性爆炸，所以考虑加速。那么很容易想到矩阵乘法(<del>我也不会别的</del>)</p>
+<p>那么考虑把这个递推式子变成可以矩阵的形式，那么就考虑把答案弄进一个矩阵里，(那么就设一个$1\times 1$的吧！(啪))</p>
+<p>显然，设一个$1\times 1$的矩阵是一个很不明智的行为，因为没法转移。考虑到当前的状态与前两项有关。</p>
+<p>所以构造一个$1\times 2$向量表示$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}$</p>
+<p>那么转移也就很显然了</p>
+<p>我们要达到这样一个目的：</p>
+<p>$$\begin{bmatrix}F_{n-1} &amp; F_{n-2}\end{bmatrix}\rightarrow\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}$$</p>
+<p>变个形</p>
+<p>$$\begin{bmatrix}F_{n-1} &amp; F_{n-2}\end{bmatrix}\rightarrow\begin{bmatrix}F_{n-1}\times 1+F_{n-2}\times 1 &amp; F_{n-1}\times 1\end{bmatrix}$$</p>
+<p>那么就可以构造中间的矩阵了</p>
+<p>显然就是</p>
+<p>$$\begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix}$$</p>
+<p>带回去验证一下$qwq$</p>
+<p>$$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix}=\begin{bmatrix}F_{n-1}\times 1+F_n\times 1 &amp; F_{n}\times 1+F_{n-1}\times 0\end{bmatrix}=\begin{bmatrix}F_{n+1} &amp; F_{n}\end{bmatrix}$$</p>
+<p>发现成立了诶。</p>
+<hr>
+<h2 id="更大的栗子"><a href="#更大的栗子" class="headerlink" title="更大的栗子"></a>更大的栗子</h2><p>出门右转大炒锅</p>
+<p>广义的斐波那契数列是指形如$a_n=p\times a_{n-1}+q\times a_{n-2}$的式子，给出$p,q,a_1,a_2,n,m$，求$a_n\mod m$。</p>
+<p>除了和上一题的系数不变没区别啊喂(#`O′)<del>(啪，多嘴)</del></p>
+<p>考虑到只有转移时的系数变了，那么只要改变你构造的矩阵就可以了，那么我们再考虑转移是如何进行的</p>
+<p>$$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1  &amp; 1 \\ 1 &amp; 0\end{bmatrix}=\begin{bmatrix}F_{n-1}\times 1+F_n\times 1 &amp; F_{n}\times 1+F_{n-1}\times 0\end{bmatrix}=\begin{bmatrix}F_{n+1} &amp; F_{n}\end{bmatrix}$$</p>
+<p>那么注意到改变的实际上只有这一项$F_{n-1}\times 1+F_n\times 1$，考虑这一项是怎么来的，根据矩阵乘法的定义我们知道这一项实际上是</p>
+<p>向量的第一行乘矩阵的第一列，也就是$\begin{bmatrix}F_n &amp; F_{n-1}\end{bmatrix}\begin{bmatrix}1 \\ 1\end{bmatrix}$</p>
+<p>那么我们只需要改动这一列即可，即把这一列改为$\begin{bmatrix}p \\ q\end{bmatrix}$</p>
+<p>那么最后的转移矩阵就是</p>
+<p>$$\begin{bmatrix}p &amp; 1 \\ q &amp; 0\end{bmatrix}$$</p>
+<p>最后放上这个题的核心代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ll mod;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mar</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll a[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">&#125;ans,base;</span><br><span class="line"></span><br><span class="line"><span class="function">mar <span class="title">mul</span><span class="params">(mar x,mar y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mar t;</span><br><span class="line">    <span class="built_in">memset</span>(t.a,<span class="number">0</span>,<span class="keyword">sizeof</span>(t.a));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>;++j)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=<span class="number">2</span>;++k)</span><br><span class="line">            t.a[i][j]+=(x.a[i][k])%mod*(y.a[k][j])%mod,t.a[i][j]%=mod;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ans.a[<span class="number">1</span>][<span class="number">1</span>]=a2,ans.a[<span class="number">1</span>][<span class="number">2</span>]=a1;</span><br><span class="line">base.a[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">base.a[<span class="number">2</span>][<span class="number">1</span>]=q;</span><br><span class="line">base.a[<span class="number">1</span>][<span class="number">1</span>]=p;</span><br><span class="line">ksm(n<span class="number">-2</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="关于矩阵乘法的优化"><a href="#关于矩阵乘法的优化" class="headerlink" title="关于矩阵乘法的优化"></a>关于矩阵乘法的优化</h2><h3 id="A-缓存优化"><a href="#A-缓存优化" class="headerlink" title="A.缓存优化"></a>A.缓存优化</h3><p>先普及一点知识: $CPU\space cache$</p>
+<p>通俗点说就是平时说的缓存，是位于$CPU$和内存之间的临时存储器，具有体积小，交换速率快的特点，存储的是$CPU$即将访问的内存。</p>
+<p>所以缓存存在的意义就是为了加快内存访问的速度。</p>
+<p>那么对于$OIer$来说，这东西唯一的用处就是卡常，可能会有人听过”数组不要开偶偶数大小”之类的玄学。但这可能真的是有用的。</p>
+<p>程序在一段时间内访问的数据通常具有局部性，比如对一维数组来说，访问了地址x上的元素，那么以后访问地址$x+1$、$x+2$上元素的可能性就比较高；这也称为$cache$的空间局限性。</p>
+<p>如果说人话的话。就是数组的访问顺序是水平连续的。</p>
+<p>让我们再来两个栗子</p>
+<ul>
+<li><p>1</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;++k)</span><br><span class="line">            c[i][j]=a[i][k]*b[k][j];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;++k)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            c[i][j]=a[i][k]*b[k][j];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>眼尖的同学可能会发现，这两段程序唯一的不同只有二三层的循环循顺序啊(#`O′)<del>(啪，就你多嘴)</del></p>
+<p>那么实际上的效率可能会在数据很大的时候产生极大的差异。</p>
+<p>因为根据我们上边所了解到的信息，对于代码2中的$a[i]$和$b[k]$这两行的访问都是连续的，所以缓存会被充分利用。这样就达到了卡常的目的。</p>
+<p>这种做法的术语是$loop\space permutation$(循环置换)</p>
+<p>测试代码（搬运的时候图片丢了，凑合着看吧）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> file(a) freopen(a<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin);freopen(a<span class="meta-string">".out"</span>,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> IN[<span class="number">1</span>&lt;&lt;<span class="number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">gc</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="number">1</span>,<span class="number">1</span>&lt;&lt;<span class="number">17</span>,<span class="built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">register</span> <span class="keyword">char</span> c=gc();</span><br><span class="line">    <span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c==<span class="string">'-'</span>&amp;&amp;(f=<span class="number">-1</span>),c=gc());</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);now=now*<span class="number">10</span>+c-<span class="string">'0'</span>,c=gc());</span><br><span class="line">    <span class="keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a[<span class="number">1100</span>][<span class="number">1100</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> temp[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> c[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"a.out"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"x1.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">int</span> n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)b[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)c[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;++k)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">                (a[i][j]+=b[i][k]*c[k][j])%=mod;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for(int i=1;i&lt;=n;++i)</span></span><br><span class="line">    <span class="comment">//  for(int j=1;j&lt;=n;++j)</span></span><br><span class="line">    <span class="comment">//      for(int k=1;k&lt;=n;++k)</span></span><br><span class="line">    <span class="comment">//          (a[i][j]+=(b[i][k]*c[k][j]))%=mod;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="built_in">printf</span>(<span class="string">"%lld "</span>,a[<span class="number">5</span>][i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Elapsed time:%.2lf secs.\n"</span>,<span class="number">1.0</span>*clock()/<span class="number">1000.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有兴趣的同学可以去尝试做一下<a href="http://acm.hdu.edu.cn/showproblem.php?pid=4920" target="_blank" rel="noopener">$HUD4920$</a>。</p>
+<p>经典的矩阵乘法卡$(du)$常$(liu)$题。</p>
+<h3 id="B-矩阵分块"><a href="#B-矩阵分块" class="headerlink" title="B.矩阵分块"></a>B.矩阵分块</h3><p>当矩阵特别大时，可能会发生缓存放不下的情况，那么之前的$ikj$优化就会收效甚微，所以我们考虑把一个矩阵分为几块子矩阵，不过需要注意的是A的行的划分与B的列的划分必须一致。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> size=n/<span class="number">25</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> it=<span class="number">1</span>;it&lt;=n;it+=size)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> jt=<span class="number">1</span>;jt&lt;=n;jt+=size)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> kt=<span class="number">1</span>;kt&lt;=n;kt+=size)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=it;i&lt;=it+size;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=jt;j&lt;=jt+size;j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=kt;k&lt;=kt+size;k++)</span><br><span class="line">                (a[i][j]+=b[i][k]*c[k][j])%=mod;</span><br></pre></td></tr></table></figure>
+
+<h3 id="C-次数优化"><a href="#C-次数优化" class="headerlink" title="C.次数优化"></a>C.次数优化</h3><p>大家可能做过最优矩阵链乘问题问题。</p>
+<p>本质就是利用结合律来减少乘法次数。</p>
+<p>例如</p>
+<p>A是一个$50×10$的矩阵，B是$10×20$的矩阵，C是$20×5$的矩阵</p>
+<p>那么要把$ABC$乘起来的话，有两种顺序，一种是$(A(BC))$，另一种是$((AB)C)$</p>
+<p>而这两种顺序的乘法次数一个是$3500$次，而另一个却是$15000$次,所以当数据非常大的时候，我们可以考虑构造一个乘法的顺序，使得乘法次数最小，但只适用于矩阵少而大的情况。</p>
+<h3 id="D-取模优化"><a href="#D-取模优化" class="headerlink" title="D.取模优化"></a>D.取模优化</h3><p>众所周知，计算机中的取模运算非常之慢，而$long\space long$的取模是最慢的，所以很多人程序的常数大的原因也是这个。所以我们可能会在某些人的程序中看到这样的函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">mo</span><span class="params">(ll x,ll y)</span></span>&#123;<span class="keyword">return</span> x+y&gt;=mod?x+y-mod:x+y;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就是利用减法代替取模从而达到卡常的效果。</p>
+<p>对于矩阵乘法也是这样。我们可以设定一个$ull$上界$Q=16ull*mod$，当超过这个上界时就可以直接用减法代替取模，因为当$mod$在$10^9$级别时，$ull$最多只能存下$16$个$mod\times mod$相加。</p>
+<p>当然中间过程需要$long\space long$来存储，而最后的结果最好还是$int$类型。</p>
+<p>所以取模次数由$O(n^3)$降到$O(n^2)$次</p>
+<p>但实际效果略逊于$ikj$，可能是本机的问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> file(a) freopen(a<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin);freopen(a<span class="meta-string">".out"</span>,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> IN[<span class="number">1</span>&lt;&lt;<span class="number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">gc</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="number">1</span>,<span class="number">1</span>&lt;&lt;<span class="number">17</span>,<span class="built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">register</span> <span class="keyword">char</span> c=gc();</span><br><span class="line">    <span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c==<span class="string">'-'</span>&amp;&amp;(f=<span class="number">-1</span>),c=gc());</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);now=now*<span class="number">10</span>+c-<span class="string">'0'</span>,c=gc());</span><br><span class="line">    <span class="keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>  ull;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> ull Q=<span class="number">16u</span>ll*mod*mod;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1100</span>][<span class="number">1100</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> temp;</span><br><span class="line">ull b[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line">ull c[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function">ull <span class="title">mo</span><span class="params">(ull x,ull y)</span></span>&#123;<span class="keyword">return</span> x+y&gt;=Q?x+y-Q:x+y;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"a.out"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"x2.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">int</span> n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)b[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)c[i][j]=read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            temp=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>,s=<span class="number">1</span>;k&lt;=n;++k,s++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s==<span class="number">16</span>)temp=mo(temp,b[i][k]*c[k][j]),s=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> temp+=b[i][k]*c[k][j];</span><br><span class="line">            &#125;</span><br><span class="line">            a[i][j]=temp%mod;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[<span class="number">5</span>][i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Elapsed time:%.2lf secs.\n"</span>,<span class="number">1.0</span>*clock()/<span class="number">1000.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和$ikj$优化一起用的效果</p>
+<p><a href="https://i.loli.net/2019/07/11/5d26d290089c675334.png" class="gallery-item" target="_blank" rel="noopener"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://i.loli.net/2019/07/11/5d26d290089c675334.png" alt></a></p>
+<h3 id="E-特判优化"><a href="#E-特判优化" class="headerlink" title="E.特判优化"></a>E.特判优化</h3><p>特判矩阵的元素是否为$0$，如果是$0$可以直接$continue$,在稀疏矩阵里有奇效，由于数据比较难生成，所以不实际运行.还请见谅</p>
+<hr>
+<p>感谢审核的$@ComeIntoPower$提出的宝贵意见。</p>
+<p>另:测试数据均为以下代码生成</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> file(a) freopen(a<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin);freopen(a<span class="meta-string">".out"</span>,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> IN[<span class="number">1</span>&lt;&lt;<span class="number">17</span>],*SS=IN,*TT=IN;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">gc</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> (SS==TT&amp;&amp;(TT=(SS=IN)+fread(IN,<span class="number">1</span>,<span class="number">1</span>&lt;&lt;<span class="number">17</span>,<span class="built_in">stdin</span>),SS==TT)?EOF:*SS++);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">register</span> <span class="keyword">char</span> c=gc();</span><br><span class="line">    <span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c==<span class="string">'-'</span>&amp;&amp;(f=<span class="number">-1</span>),c=gc());</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);now=now*<span class="number">10</span>+c-<span class="string">'0'</span>,c=gc());</span><br><span class="line">    <span class="keyword">return</span> now*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(time(<span class="literal">NULL</span>)*<span class="number">20020307</span>%<span class="number">19260817</span>);</span><br><span class="line">    freopen(<span class="string">"a.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1000</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"1000\n"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,rand()*<span class="number">10</span>+<span class="number">50000</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,rand()*<span class="number">10</span>+<span class="number">50000</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// printf("Elapsed time:%.2lf secs.\n",1.0*clock()/1000.0);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><a href="https://shehuizhuyihao.blog.luogu.org/post-zhen-sheng-fa" class="LinkCard" target="_blank" rel="noopener">转载自此文章</a></p>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-01-17T13:46:08+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 2020年1月17日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/数学/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>数学</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/矩阵/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>矩阵</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://xecades.xyz/articles/matrix.html&title=转 - 矩阵乘法 | Xecades&pics=https://i.loli.net/2019/08/10/tL3xw6mQ5rRnYlo.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xecades.xyz/articles/matrix.html&title=转 - 矩阵乘法 | Xecades&pics=https://i.loli.net/2019/08/10/tL3xw6mQ5rRnYlo.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/articles/PriorityLevel.html" rel="prev" title="运算符优先级">
+                                  
+                                      运算符优先级
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/C-11/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>C++11</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/articles/BigNumCalc.html" rel="prev" title="高精度计算代码">
+                                    
+                                        高精度计算代码
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/高精度/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>高精度</a> <a class="tag" href="/tags/算法/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>算法</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '转 - 矩阵乘法',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+          
+          
+            <section class='widget author'>
+  <div class='content material'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://i.loli.net/2019/08/10/tL3xw6mQ5rRnYlo.png'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:a1227253013@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/xecades"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=2135174618&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='material'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content material'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#啥是矩阵乘法"><span class="toc-text">啥是矩阵乘法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-两个矩阵能相乘的条件"><span class="toc-text">A.两个矩阵能相乘的条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-矩阵咋相乘"><span class="toc-text">B.矩阵咋相乘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-注意事项"><span class="toc-text">C.注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-这东西有啥性质啊"><span class="toc-text">D.这东西有啥性质啊</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这玩意有啥用"><span class="toc-text">这玩意有啥用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用前提：矩阵快速幂-这又是啥啊"><span class="toc-text">应用前提：矩阵快速幂(这又是啥啊)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来个栗子啊"><span class="toc-text">来个栗子啊</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更大的栗子"><span class="toc-text">更大的栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于矩阵乘法的优化"><span class="toc-text">关于矩阵乘法的优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-缓存优化"><span class="toc-text">A.缓存优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-矩阵分块"><span class="toc-text">B.矩阵分块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-次数优化"><span class="toc-text">C.次数优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-取模优化"><span class="toc-text">D.取模优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E-特判优化"><span class="toc-text">E.特判优化</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='material'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;导航栏</div>
+  
+</header>
+
+  <div class='content material'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/"
+          
+            rel="nofollow"
+          
+          
+          id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于作者
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='material'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content material'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/DP/" href="/categories/DP/"><div class='name'>DP</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/STL/" href="/categories/STL/"><div class='name'>STL</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/捣鼓/" href="/categories/捣鼓/"><div class='name'>捣鼓</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数学/" href="/categories/数学/"><div class='name'>数学</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/文化课/" href="/categories/文化课/"><div class='name'>文化课</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/杂项/" href="/categories/杂项/"><div class='name'>杂项</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法/" href="/categories/算法/"><div class='name'>算法</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/随笔/" href="/categories/随笔/"><div class='name'>随笔</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/题目/" href="/categories/题目/"><div class='name'>题目</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/题解/" href="/categories/题解/"><div class='name'>题解</div><div class='badge'>(4)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='material'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content material'>
+      <a href="/tags/C-11/" style="font-size: 14px; color: #999">C++11</a> <a href="/tags/DP/" style="font-size: 14px; color: #999">DP</a> <a href="/tags/KMP/" style="font-size: 16.5px; color: #888">KMP</a> <a href="/tags/STL/" style="font-size: 21.5px; color: #666">STL</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/二分图/" style="font-size: 14px; color: #999">二分图</a> <a href="/tags/二进制/" style="font-size: 16.5px; color: #888">二进制</a> <a href="/tags/优化/" style="font-size: 14px; color: #999">优化</a> <a href="/tags/位运算/" style="font-size: 16.5px; color: #888">位运算</a> <a href="/tags/字符串/" style="font-size: 14px; color: #999">字符串</a> <a href="/tags/库函数/" style="font-size: 14px; color: #999">库函数</a> <a href="/tags/捣鼓/" style="font-size: 16.5px; color: #888">捣鼓</a> <a href="/tags/教程/" style="font-size: 14px; color: #999">教程</a> <a href="/tags/数学/" style="font-size: 24px; color: #555">数学</a> <a href="/tags/数据结构/" style="font-size: 21.5px; color: #666">数据结构</a> <a href="/tags/文化课/" style="font-size: 14px; color: #999">文化课</a> <a href="/tags/模拟/" style="font-size: 14px; color: #999">模拟</a> <a href="/tags/滑稽/" style="font-size: 14px; color: #999">滑稽</a> <a href="/tags/矩阵/" style="font-size: 14px; color: #999">矩阵</a> <a href="/tags/算法/" style="font-size: 19px; color: #777">算法</a> <a href="/tags/背包/" style="font-size: 14px; color: #999">背包</a> <a href="/tags/随笔/" style="font-size: 14px; color: #999">随笔</a> <a href="/tags/题目/" style="font-size: 14px; color: #999">题目</a> <a href="/tags/题解/" style="font-size: 19px; color: #777">题解</a> <a href="/tags/高精度/" style="font-size: 14px; color: #999">高精度</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:a1227253013@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/xecades"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2135174618&amp;site=qq&amp;menu=yes"
+            class="social fab fa-qq flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material-X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["https://s2.ax1x.com/2019/08/10/eXPVTe.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://s2.ax1x.com/2019/08/10/eXPVTe.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "062ee929cf80fdb1d10c",
+      clientSecret: "e854d3ee28dc91637e00dedaa74ab27d342b24c0",
+      repo: "Xecades.github.io",
+      owner: "Xecades",
+      admin: "Xecades",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "[object Object]";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+  <script type="text/javascript" src="/js/linkcard.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>

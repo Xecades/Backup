@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valine Demo</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="style.css">
+    <script src='//unpkg.com/valine@latest/dist/Valine.min.js'></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1><a class="info" href="https://valine.js.org/">Valine Document</a></h1>
+        <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'mt2RtBf6ICBmJmDQWz17P1uE-gzGzoHsz',
+                appKey: '4ocgwcavPdHjxeIPb6yy7r42',
+                notify: false,
+                verify: false,
+                avatar: 'mp',
+                placeholder: 'Where there is a shell, there is a way.'
+            });
+        </script>
+    </div>
+</body>
+
+</html>

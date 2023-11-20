@@ -1,0 +1,174 @@
+:root {
+    --background-color: #fff;
+    --font-color: #35495e;
+    --input-color: #000;
+}
+
+@font-face {
+    font-family: "GYJZ";
+    src: url("/fonts/GuYuJieZi.woff2") format("woff2"),
+        url("/fonts/GuYuJieZi.woff") format("woff"),
+        url("/fonts/GuYuJieZi.ttf") format("truetype"),
+        url("/fonts/GuYuJieZi.otf") format("opentype"),
+        url("/fonts/GuYuJieZi.eot") format("embedded-opentype");
+}
+
+@font-face {
+    font-family: OuterFont;
+    src: url("/fonts/OuterFont.otf")
+}
+
+html::-webkit-scrollbar {
+    display: none !important
+}
+
+body::-webkit-scrollbar {
+    display: none !important
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    color: var(--font-color);
+    background-color: var(--background-color);
+    font-family: Microsoft YaHei, SimHei, Roboto Mono, Source Code Pro, Ubuntu Mono, Consolas
+}
+
+a {
+    text-decoration: none;
+    color: cadetblue
+}
+
+.container {
+    min-height: 100vh;
+    align-items: center;
+    overflow: hidden
+}
+
+.container,
+.card-wrap {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around
+}
+
+.card-wrap {
+    height: 60vh;
+    width: 100vw;
+    overflow: visible
+}
+
+.card-wrap,
+.card {
+    position: relative;
+    transition: -webkit-transform .5s;
+    transition: transform .5s;
+    transition: transform .5s, -webkit-transform .5s
+}
+
+.card {
+    margin: 0 auto;
+    height: 100%;
+    width: 60%;
+    border: 2px solid var(--font-color);
+    overflow: hidden;
+    border-radius: 12px
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    top: 20%;
+    font-weight: 100;
+    font-size: 8vh;
+    letter-spacing: 1px;
+}
+
+.title-small {
+    font-size: small;
+}
+
+.smalltitle {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    font-weight: 100;
+    font-size: 3vh;
+    letter-spacing: 1px
+}
+
+.smalltitle2 {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    font-weight: 100;
+    font-size: 3vh;
+    letter-spacing: 1px
+}
+
+.hint {
+    position: absolute;
+    left: 10px;
+    cursor: default
+}
+
+.question-content {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    top: 60%;
+    text-align: center;
+    font-size: 3vh
+}
+
+.question-input>input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-bottom: 1px solid var(--input-color);
+    outline: none;
+    padding: 8px;
+    font-size: 2vh
+}
+
+.cardIn {
+    -webkit-animation: 1s forwards;
+    animation: 1s forwards;
+    -webkit-animation-name: cardIn;
+    animation-name: cardIn
+}
+
+@-webkit-keyframes cardIn {
+    0% {
+        -webkit-transform: translate3d(0, 300px, 0) rotate(15deg);
+        transform: translate3d(0, 300px, 0) rotate(15deg);
+        opacity: 0
+    }
+
+    to {
+        -webkit-transform: none;
+        transform: none;
+        opacity: 1
+    }
+}
+
+@keyframes cardIn {
+    0% {
+        -webkit-transform: translate3d(0, 300px, 0) rotate(15deg);
+        transform: translate3d(0, 300px, 0) rotate(15deg);
+        opacity: 0
+    }
+
+    to {
+        -webkit-transform: none;
+        transform: none;
+        opacity: 1
+    }
+}

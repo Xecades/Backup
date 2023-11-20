@@ -1,0 +1,186 @@
+<html>
+
+<head>
+    <title>bak10-7.cpp</title>
+    <!--导入js库-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor" style="min-height:10000"><textarea class="ace_text-input">#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <curses.h>
+#include <string.h>
+#include <string>
+
+#define CLEAR() printf("\033[2J")
+#define MOVEUP(x) printf("\033[%dA", (x))
+#define MOVEDOWN(x) printf("\033[%dB", (x))
+#define MOVELEFT(y) printf("\033[%dD", (y))
+#define MOVERIGHT(y) printf("\033[%dC",(y))
+#define MOVETO(x,y) printf("\033[%d;%dH", (x), (y))
+#define RESET_CURSOR() printf("\033[H")
+#define MEM_CURSOR() printf("\033[s")
+#define RECOVER_CURSOR() printf("\033[u")
+#define HIDE_CURSOR() printf("\033[?25l")
+#define SHOW_CURSOR() printf("\033[?25h")
+#define HIGHT_LIGHT() printf("\033[7m")
+#define UN_HIGHT_LIGHT() printf("\033[27m")
+
+#define max(a, b) ((a > b) ? (a) : (b))
+#define min(a, b) ((a < b) ? (a) : (b))
+
+#define INPUT true
+#define CODE false
+
+WINDOW information;
+int speed = 1;
+bool mode = INPUT;
+
+int kbhit(void)
+{
+	struct termios oldt, newt;
+	int ch;
+	int oldf;
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+	ch = getchar();
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	fcntl(STDIN_FILENO, F_SETFL, oldf);
+	if(ch != EOF)
+	{
+		ungetc(ch, stdin);
+		return 1;
+	}
+	return 0;
+}
+
+void getWinSize(int &col, int &row)
+{
+	struct winsize size;
+	ioctl(STDIN_FILENO,TIOCGWINSZ,&size);
+	col = size.ws_col;
+	row = size.ws_row;
+}
+
+void Refresh()
+{
+	int c, r;
+	getWinSize(c, r);
+	std::string wd = ((mode == INPUT) ? "INPUT" : "CODE");
+	HIGHT_LIGHT();
+	MEM_CURSOR();
+	// Draw Background
+	//if (mode == INPUT)
+	MOVETO(r, 0);
+	for (int i = 1; i <= c; i++)
+		putchar(' ');
+	// Draw Mode
+	MOVETO(r, 0);
+	printf("%s", wd.c_str());
+	// Draw Speed
+	MOVETO(r, c - 10);
+	printf("SPEED:%5d", speed);
+	// Reset
+	RECOVER_CURSOR();
+	UN_HIGHT_LIGHT();
+}
+
+int main()
+{
+	//#define _DEBUG_
+	initscr();
+	cbreak();
+	noecho();
+	keypad(stdscr, TRUE);
+	box(stdscr, 0, 0);
+	refresh();
+	printf("\033]2;A Simple Test On Linux\007");
+	Refresh();
+	while (1)
+	{
+		if (kbhit())
+		{
+			int ch = getchar();
+			fflush(stdin);
+			if (ch == 27)
+			{
+				mode = !mode;
+				Refresh();
+			}
+			else if (mode == INPUT)
+			{
+				switch(ch)
+				{
+					case KEY_BACKSPACE: MOVELEFT(1);putchar(' ');MOVELEFT(1);break;
+					case KEY_UP: MOVEUP(speed);break;
+					case KEY_DOWN: MOVEDOWN(speed);break;
+					case KEY_LEFT: MOVELEFT(speed);break;
+					case KEY_RIGHT: MOVERIGHT(speed);break;
+					default: putchar(ch);break;
+				}
+				//Refresh();
+			}
+			else if (mode == CODE)
+			{
+				switch(ch)
+				{
+					case 'w':case 'W':case KEY_UP: MOVEUP(speed);break;
+					case 's':case 'S':case KEY_DOWN: MOVEDOWN(speed);break;
+					case 'a':case 'A':case KEY_LEFT: MOVELEFT(speed);break;
+					case 'd':case 'D':case KEY_RIGHT: MOVERIGHT(speed);break;
+					case '+':case '=': speed = min(speed + 1, 30);Refresh();break;
+					case '-': speed = max(speed - 1, 1);Refresh();break;
+					case 'q':case 'Q': exit(0);
+				}
+			}
+			#ifdef _DEBUG_
+			//Refresh();
+			#endif
+		}
+	}
+	endwin();
+	CLEAR();
+	RESET_CURSOR();
+	return 0;
+}</textarea></pre>
+    <script>
+        //初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(true);
+
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    </script>
+</body>
+
+</html>

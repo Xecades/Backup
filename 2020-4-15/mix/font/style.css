@@ -1,0 +1,20 @@
+#code {
+    width: 700px;
+    position: absolute;
+    left: 50%;
+    margin-top: 100px;
+    transform: translate(-50%, 0);
+}
+
+#code a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    transition: color .2s;
+}
+
+#code a:hover {
+    color: #00ffff;
+}

@@ -1,0 +1,102 @@
+﻿<html>
+
+<head>
+    <title>Manacher Palindrome.cpp</title>
+    <!--导入js库-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor" style="min-height:10000"><textarea class="ace_text-input">#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <cstring>
+#include <string>
+using namespace std;
+const int maxn = 11000010;
+
+int manacher(string);
+string fillChar(string);
+
+int main()
+{
+	string str = "abcdcbafabcdck";
+	cout << manacher(str);
+	return 0;
+}
+
+int manacher(string str)
+{
+	if (str == "" || str.length() < 1)
+		return 0;
+	string arr = fillChar(str);
+	int radius[maxn] = {0};
+	int R = -1, C = -1;
+	int maxlen = -0x3f3f3f3f;
+	int strlen = str.length();
+	for (int i = 0; i < strlen; i++)
+	{
+		if (R > i)
+			radius[i] = min(radius[2 * C - i], R - i + 1);
+		else
+			radius[i] = 1;
+		while (i + radius[i] < strlen && i - radius[i] > -1)
+		{
+			if (str[i - radius[i]] == str[i + radius[i]])
+				radius[i]++;
+			else
+				break;
+		}
+		if (i + radius[i] > R)
+		{
+			R = i + radius[i] - 1;
+			C = i;
+		}
+		maxlen = max(maxlen, radius[i]);
+	}
+	return maxlen - 1;
+}
+
+string fillChar(string str)
+{
+	string ans = "";// ans = "$";
+	int len = str.length();
+	for (int i = 0; i < len; i++)
+	{
+		ans += '#';
+		ans += str[i];
+	}
+	ans += '#';
+	return ans;
+}</textarea></pre>
+    <script>
+        //初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(true);
+
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    </script>
+</body>
+
+</html>

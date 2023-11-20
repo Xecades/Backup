@@ -1,0 +1,30 @@
+#wrapper {
+    position: relative;
+    width: 22rem;
+    height: 6rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: inline-block;
+}
+
+#wrapper .emoji {
+    font-size: 5rem;
+    line-height: 5rem;
+}
+
+#wrapper .right {
+    margin-top: 1.4rem;
+    height: 3rem;
+    line-height: 1.5rem;
+    text-align: right;
+    font-weight: lighter;
+}
+
+#wrapper .right .above {
+    font-size: 1.2rem;
+}
+
+#wrapper .right .hint {
+    font-size: 1rem;
+    color: #aaa !important;
+}

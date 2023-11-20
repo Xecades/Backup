@@ -1,0 +1,113 @@
+<html>
+
+<head>
+    <title>Segment Tree.cpp</title>
+    <!--导入js库-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor" style="min-height:10000"><textarea class="ace_text-input">#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+using namespace std;
+#define left_son  (node * 2 + 1)	// Left  Son
+#define right_son (node * 2 + 2)	// Right Son
+const int maxn = 100010;
+
+int arr[maxn]  = {1, 2, 3, 4, 5};	// Orign of Segment Tree
+int tree[maxn] = {0};				// Segment Tree
+int size = 5;
+
+void build_tree(int, int, int);
+void update_tree(int, int, int, int, int);
+int query_tree(int, int, int, int, int);
+
+int main()
+{
+	build_tree(0, 0, size - 1);
+	for (int i = 0; i <= 20; i++)
+		cout << tree[i] << " ";
+	cout << endl << endl;
+	/*
+	update_tree(0, 0, size  - 1, 3, 10);
+	for (int i = 0; i <= 20; i++)
+		cout << tree[i] << " ";
+	cout << endl;
+	*/
+	cout << query_tree(0, 0, size - 1, 2, 4);
+	return 0;
+}
+
+// Build Segment Tree
+void build_tree(int node, int start, int end)
+{
+	if (start == end)
+	{
+		tree[node] = arr[start];
+		return;
+	}
+	int mid = (start + end) >> 1;
+	build_tree(left_son, start, mid);
+	build_tree(right_son, mid + 1, end);
+	tree[node] = tree[left_son] + tree[right_son];// Update
+}
+
+// Change Index into Value
+void update_tree(int node, int start, int end, int index, int value)
+{
+	if (index < start || index > end)
+		return;
+	if (start == end && start == index)
+	{
+		tree[node] = arr[index] = value;
+		return;
+	}
+	int mid = (start + end) >> 1;
+	update_tree(left_son,  start,   mid, index, value);
+	update_tree(right_son, mid + 1, end, index, value);
+	tree[node] = tree[left_son] + tree[right_son];// Update
+}
+
+// Query Sum of Range [left, right]
+int query_tree(int node, int start, int end, int left, int right)
+{
+	if (right < start || left > end)
+		return 0;
+	if (left <= start && end <= right)
+		return tree[node];
+	int mid = (start + end) >> 1;
+	int query_left  = query_tree(left_son,  start,   mid, left, right);
+	int query_right = query_tree(right_son, mid + 1, end, left, right);
+	return query_left + query_right;// Get Sum
+}</textarea></pre>
+    <script>
+        //初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(true);
+
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    </script>
+</body>
+
+</html>

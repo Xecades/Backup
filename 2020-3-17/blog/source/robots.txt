@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Allow: /articles/
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /note/
+Allow: /knowledge/
+Allow: /progress/
+Disallow: /js/
+Disallow: /css/
+Disallow: /images/
+Disallow: /assets/
+Disallow: /lib/
+Disallow: /page/
+
+Sitemap: https://blog.xecades.xyz/sitemap.xml
+Sitemap: https://blog.xecades.xyz/baidusitemap.xml

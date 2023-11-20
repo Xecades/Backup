@@ -1,0 +1,11 @@
+git remote add origin ...
+
+main: git@e.coding.net:Xecades-01/xecades.git
+CDN: git@e.coding.net:Xecades-01/cdn.git
+about: git@e.coding.net:Xecades-01/about.git
+file: git@e.coding.net:Xecades-01/file.git
+game: git@e.coding.net:Xecades-01/game.git
+nazo: git@e.coding.net:Xecades-01/nazo.git
+friend: git@e.coding.net:Xecades-01/friend.git
+tool: git@e.coding.net:Xecades-01/tool.git
+Ìì¿Õ: git@e.coding.net:Xecades-01/sky.git

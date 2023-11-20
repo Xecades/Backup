@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <title>ASCII.cpp</title>
+    <link rel="icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+    <link rel="apple-touch-icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+    <link rel="shortcut icon" href="https://cdn.xecades.xyz/image/favicon.ico">
+<!--导入js库-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor" style="min-height:10000"><textarea class="ace_text-input">//compile this file and follow the guide
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <cstring>
+#include <windows.h>
+using namespace std;
+
+string mode, s;
+int arg, len;
+
+void Error();
+
+int main(int argc, char *argv[])
+{
+	if (argc >= 2)
+		mode = argv[1];
+	if (argc >= 3)
+		s = argv[2];
+	arg = argc;
+	len = s.length();
+	Error();
+	if (mode == "-ascii" || mode == "-a")
+	{
+		for (int i = 0; i < len; i += 2)
+			cout << (int)s[i] << "," << (int)s[i + 1] << " ";
+	}
+	else if (mode == "-source" || mode == "-s")
+	{
+		cout << "#include <cstdio>" << endl;
+		cout << "#include <windows.h>" << endl;
+		cout << endl;
+		cout << "int array[" << len + 2 << "] = {0";
+		for (int i = 0; i < len; i++)
+			cout << ", " << (int)s[i];
+		cout << "};" << endl;
+		cout << endl;
+		cout << "int main()" << endl;
+		cout << "{" << endl;
+		cout << "    for (int i = 1; i <= " << len << "; i++)" << endl;
+		cout << "    {" << endl;
+		cout << "        printf(\"%c\", array[i]);" << endl;
+		cout << "        Sleep(100);" << endl;
+		cout << "    }" << endl;
+		cout << "    return 0;" << endl;
+		cout << "}";
+	}
+	else if (mode == "-part" || mode == "-p")
+	{
+		cout << "printf(\"";
+		for (int i = 0; i < len; i++)
+			cout << "%c";
+		cout << "\"";
+		for (int i = 0; i < len; i++)
+			cout << ", " << (int)s[i];
+		cout << ");" << endl;
+	}
+	else if (mode == "-run" || mode == "-r")
+	{
+		for (int i = 0; i < len; i++)
+		{
+			cout << s[i];
+			Sleep(100);
+		}
+	}
+	else
+	{
+		arg = -1;
+		Error();
+	}
+	return 0;
+}
+
+void Error()
+{
+	if (arg != 3 && mode != "-h" && mode != "-help")
+	{
+		cout << "[ERROR] - Parameters Required." << endl;
+	}
+	if (arg != 3)
+	{
+		cout << "[HELP]" << endl;
+		cout << "> ASCII [mode] [sentence]" << endl << endl;
+		cout << "mode:     -source / -s  Output Generated Code" << endl;
+		cout << "          -ascii  / -a  Output ASCII Code" << endl;
+		cout << "          -part   / -p  Output A Period Of Code" << endl;
+		cout << "          -run    / -r  Run This Module" << endl;
+		cout << "          -help   / -h  Show This Text" << endl;
+		cout << "sentence: A Chinese / English Sentence" << endl;
+		exit(-1);
+	}
+}
+</textarea></pre>
+    <script>
+        //初始化对象
+        editor = ace.edit("code");
+        //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+        theme = "clouds"
+        language = "c_cpp"
+        editor.setTheme("ace/theme/" + theme);
+        editor.session.setMode("ace/mode/" + language);
+        //字体大小
+        editor.setFontSize(19);
+
+        //设置只读（true时只读，用于展示代码）
+        editor.setReadOnly(true);
+
+        //自动换行,设置为off关闭
+        editor.setOption("wrap", "free")
+
+        //启用提示菜单
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    </script>
+</body>
+
+</html>
